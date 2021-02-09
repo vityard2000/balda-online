@@ -67,9 +67,11 @@
             android:layout_marginRight="10dp"
             android:layout_marginTop="10dp"
             android:text="@string/activity_menu__bt_friends"
+            android:visibility="gone"
 
             />
         <Button
+            android:visibility="gone"
             android:id="@+id/activity_menu__bt_shop"
             android:layout_width="match_parent"
             android:layout_height="50dp"
