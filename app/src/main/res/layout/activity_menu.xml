@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ActivityMenu"
+    android:background="@drawable/background_gradient">
+    <LinearLayout
+        android:id="@+id/activity_menu__lnr_lt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="60dp"
+        android:layout_marginRight="60dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:orientation="vertical">
+        <Button
+            android:id="@+id/activity_menu__bt_online_game"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/style_bt"
+            android:fontFamily="@font/gost_type"
+            android:textSize="30sp"
+            android:textAllCaps="false"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:text="@string/activity_menu__bt_online_game"
+            />
+        <Button
+            android:id="@+id/activity_menu__bt_joint_game"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/style_bt"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:fontFamily="@font/gost_type"
+            android:textSize="30sp"
+            android:textAllCaps="false"
+            android:layout_marginTop="10dp"
+            android:text="@string/activity_menu__bt_joint_game"
+
+            />
+        <Button
+            android:id="@+id/activity_menu__bt_bot_game"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/style_bt"
+            android:fontFamily="@font/gost_type"
+            android:textSize="30sp"
+            android:textAllCaps="false"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/activity_menu__bt_bot_game"
+
+            />
+        <Button
+            android:id="@+id/activity_menu_bt_friends"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/style_bt"
+            android:fontFamily="@font/gost_type"
+            android:textSize="30sp"
+            android:textAllCaps="false"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/activity_menu__bt_friends"
+
+            />
+        <Button
+            android:id="@+id/activity_menu__bt_shop"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/style_bt"
+            android:fontFamily="@font/gost_type"
+            android:textSize="30sp"
+            android:textAllCaps="false"
+            android:layout_margin="10dp"
+            android:text="@string/activity_menu__bt_shop"
+            />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/airplane_one"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/ic_airplane_1"
+        app:layout_constraintBottom_toTopOf="@id/activity_menu__lnr_lt"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginEnd="50dp"
+        android:layout_marginBottom="25dp"
+        />
+    <ImageView
+        android:id="@+id/airplane_two"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/ic_airplane_2"
+        app:layout_constraintTop_toBottomOf="@id/activity_menu__lnr_lt"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="35dp"
+        />
+
+    <ImageView
+        android:id="@+id/mascot_menu"
+        android:layout_width="150dp"
+        android:layout_height="200dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:srcCompat="@drawable/ic_mascot_menu" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

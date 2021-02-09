@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">BaldaOnline</string>
+    <string name="string_name_game">Балда</string>
+    <string name="activity_main__tv_1">текст</string>
+    <string name="activity_main__bt_1">Save</string>
+    <string name="activity_main__bt_2">Load</string>
+    <string name="activity_main__bt_to_activity_two">Перейти в другое активити</string>
+    <string name="activity_two__bt_to_activity_main">Назад</string>
+    <string name="activity_two__bt1">Показать на карте</string>
+    <string name="activity_menu__bt_online_game">Найти пару</string>
+    <string name="activity_menu__bt_joint_game">Играть двоем</string>
+    <string name="activity_menu__bt_bot_game">Играть с ботом</string>
+    <string name="activity_menu__bt_friends">Друзья</string>
+    <string name="activity_menu__bt_shop">Магазин</string>
+</resources>
