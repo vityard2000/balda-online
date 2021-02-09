@@ -11,7 +11,7 @@ public class ActivityMenu extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_menu);
+        setContentView(R.layout.activity_load);
         bt_online_game = findViewById(R.id.activity_menu__bt_online_game);
 
     }

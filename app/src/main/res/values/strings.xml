@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">BaldaOnline</string>
+    <string name="app_name">Balda Online</string>
     <string name="string_name_game">Балда</string>
     <string name="activity_main__tv_1">текст</string>
     <string name="activity_main__bt_1">Save</string>
@@ -12,4 +12,7 @@
     <string name="activity_menu__bt_bot_game">Играть с ботом</string>
     <string name="activity_menu__bt_friends">Друзья</string>
     <string name="activity_menu__bt_shop">Магазин</string>
+    <string name="activity_registration__sign_in">Вход</string>
+    <string name="activity_registration__bt_registration">Регистация</string>
+    <string name="activity_registration__bt_google">Google</string>
 </resources>

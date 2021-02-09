@@ -9,4 +9,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="bt">#186A6A</color>
     <color name="bt_press">#219B9B</color>
+    <color name="bt_google_press">#EAEAEA</color>
 </resources>
