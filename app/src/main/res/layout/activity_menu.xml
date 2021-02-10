@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ActivityMenu"
+    tools:context=".View.ActivityMenu"
     android:background="@drawable/background_gradient">
     <LinearLayout
         android:id="@+id/activity_menu__lnr_lt"
@@ -56,7 +56,7 @@
 
             />
         <Button
-            android:id="@+id/activity_menu_bt_friends"
+            android:id="@+id/activity_menu__bt_friends"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:background="@drawable/style_bt"
