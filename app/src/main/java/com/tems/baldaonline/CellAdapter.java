@@ -1,100 +1,87 @@
 package com.tems.baldaonline;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
+import android.os.Build;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.MotionEvent;
+import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
+import androidx.annotation.RequiresApi;
 
 import java.util.List;
 
-public class CellAdapter extends RecyclerView.Adapter<CellAdapter.CellViewHolder> {
+
+public class CellAdapter extends BaseAdapter {
 
     private static final String myTag = "debugTag";
+
+    private final Context context;
     private final List<Cell> cells;
 
-    public CellAdapter(List<Cell> cells) {
+    public CellAdapter(Context context, List<Cell> cells) {
+        this.context = context;
         this.cells = cells;
-        int cont = 3;
-        StringBuilder tmp;
-        for (int i = 0; i < cont; i++) {
-            tmp = new StringBuilder();
-            for (int j = 0; j < cont; j++) {
-                tmp.append("[").append(cells.get(i * cont + j).letter).append("]");
-            }
-            Log.d(myTag, tmp.toString());
-        }
-
-    }
-
-    @NonNull
-    @Override
-    public CellViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        // inflate создает новый объект java из xml файла
-        // false говорит о том, что нам не нужно помещать наш объект внутрь родительского т.к. recyclerView и так это сделает
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cell_list_item, parent, false);
-        Log.d(myTag, "создали холдер");
-
-        return new CellViewHolder(view);
+        Log.d(myTag, "попали в конструктор адаптера и передали в класс контекст с списком");
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CellViewHolder holder, int position) {
-        holder.bind(cells.get(position));
-    }
-
-    @Override
-    public int getItemCount() {
+    public int getCount() {
         return cells.size();
     }
 
-    static class CellViewHolder extends RecyclerView.ViewHolder {
+    @Override
+    public Object getItem(int position) {
+        return cells.get(position);
+    }
 
-        private final TextView textViewCellList; // ячейка
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
 
-        @SuppressLint("ClickableViewAccessibility")
-        public CellViewHolder(@NonNull View itemView) {
-            super(itemView);
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    @SuppressLint({"ResourceAsColor", "ResourceType", "ClickableViewAccessibility"})
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+        TextView textView;
 
-            textViewCellList = itemView.findViewById(R.id.cell_list_item__bt__letter);
+        if (convertView == null) {
+            // количество столбцов у поля игрового
+            int rowsCount;
+            rowsCount = (int) Math.sqrt(cells.size());
 
+            // параметры textView
+            textView = new TextView(context);
+            textView.setGravity(Gravity.CENTER);
+            textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, context.getResources().getDimension(R.dimen.sizeTextOnMapeMap));
+            textView.setBackgroundResource(R.color.white);
+            textView.setTextColor(R.color.black);
+            textView.setText(Character.toString(cells.get(position).getLetter()).toUpperCase());
 
+            // смещение из-за padding у ячеек поля
+            int offset = (int) context.getResources().getDimension(R.dimen.sizePaddingGameMap);
 
-
-            textViewCellList.setOnTouchListener(new View.OnTouchListener() {
-                @SuppressLint("ClickableViewAccessibility")
-                @Override
-                public boolean onTouch(View v, MotionEvent event) {
-                    switch (event.getAction()) {
-                        case MotionEvent.ACTION_MOVE:
-                            Log.d(myTag, "ACTION_MOVE");
-                            break;
-                        case MotionEvent.ACTION_CANCEL:
-                            Log.d(myTag, "ACTION_CANCEL");
-                            break;
-                        case MotionEvent.ACTION_DOWN:
-                            Log.d(myTag, "ACTION_DOWN");
-                            break;
-                        case MotionEvent.ACTION_UP:
-                            Log.d(myTag, "ACTION_UP");
-                            break;
-                    }
-                    return true;
+            // из-за того, что без ячеек GridView имеет ширину 0, приходиться изъебываться
+            // когда задаём параметры с 1 по n ячейки, то у первой (второй по счёту) задача задать такую же ширину и у нулевой
+            if (position != 0) {
+                if (position == 1) {
+                    TextView firstTextView = (TextView) parent.getChildAt(0);
+                    firstTextView.setHeight(parent.getWidth() / rowsCount - offset);
                 }
-            });
-        }
+                textView.setHeight(parent.getWidth() / rowsCount - offset);
+            }
 
-        // полученные данные в textView
-        private void bind(@NonNull Cell cell) {
-            Log.d(myTag, "создали начали выводить текст в textView");
-            textViewCellList.setText(Character.toString(cell.letter));
-            Log.d(myTag, "более того смогли его вывести");
+            // не обрабатываем касания у ячеек
+            textView.setOnTouchListener((v, event) -> false);
+        } else {
+            textView = (TextView) convertView;
         }
+        textView.setId(position);
+        return textView;
     }
 }
