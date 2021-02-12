@@ -12,14 +12,20 @@ public class Game {
     private final String startWord;
     private final int rowsCount;
     private static List<Cell> cells;
+    private int lastFocus;
+    private boolean emptyCell;
 
     public Game() {
         this.startWord = "балда";
         this.rowsCount = 5;
+        lastFocus = -1;
+        emptyCell = false;
     }
     public Game(String startWord, int rowsCount) {
         this.startWord = startWord;
         this.rowsCount = rowsCount;
+        lastFocus = -1;
+        emptyCell = false;
     }
 
     public static void startGame(Game game) {
@@ -56,6 +62,22 @@ public class Game {
     }
 
     public void setCells(List<Cell> cells) {
-        this.cells = cells;
+        Game.cells = cells;
+    }
+
+    public int getLastFocus() {
+        return lastFocus;
+    }
+
+    public void setLastFocus(int position) {
+        lastFocus = position;
+    }
+
+    public boolean getEmptyCell() {
+        return emptyCell;
+    }
+
+    public void setEmptyCell(boolean emptyCell) {
+        this.emptyCell = emptyCell;
     }
 }

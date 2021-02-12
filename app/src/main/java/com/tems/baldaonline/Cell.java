@@ -13,6 +13,10 @@ public class Cell {
         return focus;
     }
 
+    public void setFocus(boolean focus) {
+        this.focus = focus;
+    }
+
     public char getLetter() {
         return letter;
     }
@@ -21,7 +25,4 @@ public class Cell {
         this.letter = letter;
     }
 
-    public void setFocus(boolean focus) {
-        this.focus = focus;
-    }
 }
