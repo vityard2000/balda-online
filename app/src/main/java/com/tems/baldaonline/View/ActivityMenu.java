@@ -10,7 +10,6 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.tems.baldaonline.R;
-import com.tems.baldaonline.View.ActivityGameOneOnOne;
 
 public class ActivityMenu extends AppCompatActivity implements View.OnClickListener {
     Button buttonGameOneOnOne;
@@ -31,7 +30,7 @@ public class ActivityMenu extends AppCompatActivity implements View.OnClickListe
 
         switch (v.getId()) {
             case R.id.activity_menu__bt_joint_game:
-                Intent intent = new Intent(this, ActivityGameOneOnOne.class);
+                Intent intent = new Intent(this, ActivitySetingsGameOneOnOne.class);
                 startActivity(intent);
                 break;
         }

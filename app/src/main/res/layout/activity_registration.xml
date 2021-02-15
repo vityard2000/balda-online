@@ -14,17 +14,19 @@
         app:layout_constraintRight_toRightOf="parent">
         <Button
             android:id="@+id/activity_registration__sign_in"
-            android:layout_width="250dp"
+            android:layout_width="match_parent"
             android:layout_height="50dp"
             android:background="@drawable/style_bt"
             android:fontFamily="@font/gost_type"
             android:text="@string/activity_registration__sign_in"
             android:textAllCaps="false"
             android:layout_margin="10dp"
+            android:paddingRight="20dp"
+            android:paddingLeft="20dp"
             android:textSize="30sp"/>
         <Button
             android:id="@+id/activity_registration__sign_up"
-            android:layout_width="250dp"
+            android:layout_width="match_parent"
             android:layout_height="50dp"
             android:background="@drawable/style_bt"
             android:fontFamily="@font/gost_type"
@@ -32,10 +34,12 @@
             android:textAllCaps="false"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
+            android:paddingRight="20dp"
+            android:paddingLeft="20dp"
             android:textSize="30sp" />
         <Button
             android:id="@+id/activity_registration__google"
-            android:layout_width="250dp"
+            android:layout_width="match_parent"
             android:layout_height="50dp"
             android:background="@drawable/style_bt_google"
             android:fontFamily="@font/gost_type"
@@ -43,6 +47,8 @@
             android:text="@string/activity_registration__bt_google"
             android:textAllCaps="false"
             android:layout_margin="10dp"
+            android:paddingRight="20dp"
+            android:paddingLeft="20dp"
             android:textSize="30sp"
             />
     </LinearLayout>

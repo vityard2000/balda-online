@@ -8,7 +8,4 @@
         android:state_pressed="true"
         android:drawable="@drawable/style_bt_solid_press"
         />
-    <item android:state_focused="true"
-        android:drawable="@drawable/style_bt_solid_press"
-        />
 </selector>

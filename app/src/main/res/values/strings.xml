@@ -15,4 +15,20 @@
     <string name="activity_registration__sign_in">Вход</string>
     <string name="activity_registration__bt_registration">Регистация</string>
     <string name="activity_registration__bt_google">Google</string>
+    <string-array name="spinner_size_pole">
+        <item>3x3</item>
+        <item>4x4</item>
+        <item>5x5</item>
+        <item>6x6</item>
+        <item>7x7</item>
+    </string-array>
+    <string-array name="spinner_time">
+        <item>30с</item>
+        <item>1м</item>
+        <item>2м</item>
+        <item>5м</item>
+        <item>10м</item>
+        <item>20м</item>
+        <item>30м</item>
+    </string-array>
 </resources>
