@@ -15,6 +15,14 @@
     <string name="activity_registration__sign_in">Вход</string>
     <string name="activity_registration__bt_registration">Регистация</string>
     <string name="activity_registration__bt_google">Google</string>
+    <string name="activity_settings_game_one_on_one__start_word">Начальное слово</string>
+    <string name="activity_settings_game_one_on_one__first_name_game">Первый игрок</string>
+    <string name="activity_settings_game_one_on_one__second_name_game">Второй игрок</string>
+    <string name="activity_settings_game_one_on_one__size_pole">Размер поля</string>
+    <string name="activity_settings_game_one_on_one__time_for_turn">Время наход</string>
+    <string name="activity_settings_game_one_on_one__edt_txt_start_word">СЛОВО</string>
+    <string name="activity_settings_game_one_on_one__random_word">Случайное слово</string>
+    <string name="activity_settings_game_one_on_one__begin">Начать</string>
     <string-array name="spinner_size_pole">
         <item>3x3</item>
         <item>4x4</item>
@@ -22,7 +30,7 @@
         <item>6x6</item>
         <item>7x7</item>
     </string-array>
-    <string-array name="spinner_time">
+    <string-array name="spinner_time_ror_turn">
         <item>30с</item>
         <item>1м</item>
         <item>2м</item>

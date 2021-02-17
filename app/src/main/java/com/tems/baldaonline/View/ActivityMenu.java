@@ -23,11 +23,9 @@ public class ActivityMenu extends AppCompatActivity implements View.OnClickListe
         buttonGameOneOnOne.setOnClickListener(this);
     }
 
-    @SuppressLint({"NonConstantResourceId", "ShowToast"})
+    @SuppressLint("NonConstantResourceId")
     @Override
     public void onClick(View v) {
-        Toast.makeText(this, "вот так вот", Toast.LENGTH_SHORT);
-
         switch (v.getId()) {
             case R.id.activity_menu__bt_joint_game:
                 Intent intent = new Intent(this, ActivitySetingsGameOneOnOne.class);

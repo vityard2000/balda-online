@@ -2,4 +2,9 @@
 <resources>
     <dimen name="radius_bt">25dp</dimen>
     <dimen name="margin_between_elements">5dp</dimen>
+    <dimen name="sizePaddingGameMap">2dp</dimen>
+    <dimen name="sizeTextOnMapeMap">20dp</dimen>
+    <dimen name="height_elements">50dp</dimen>
+    <dimen name="size_text">30sp</dimen>
+    <dimen name="width_button">300dp</dimen>
 </resources>

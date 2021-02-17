@@ -22,7 +22,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".View.ActivityMenu" />
-        <activity android:name=".View.ActivityGameOneOnOne" />
+        <activity android:name=".View.ActivityGameOneOnOne">
+
+        </activity>
     </application>
 
 </manifest>
