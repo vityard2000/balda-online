@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 import com.tems.baldaonline.R;
 
@@ -28,7 +27,7 @@ public class ActivityMenu extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.activity_menu__bt_joint_game:
-                Intent intent = new Intent(this, ActivitySetingsGameOneOnOne.class);
+                Intent intent = new Intent(this, ActivitySettingsGameOneOnOne.class);
                 startActivity(intent);
                 break;
         }

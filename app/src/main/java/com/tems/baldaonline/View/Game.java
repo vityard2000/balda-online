@@ -1,6 +1,8 @@
-package com.tems.baldaonline;
+package com.tems.baldaonline.View;
 
-import android.widget.GridView;
+import com.tems.baldaonline.Cell;
+import com.tems.baldaonline.CellAdapter;
+import com.tems.baldaonline.GameUser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +16,11 @@ public class Game {
     private static List<Cell> cells;
     private int lastFocus;
     private boolean emptyCell;
+    OnTurnOverListener onTurnOverListener;
+
+    public void setOnTurnOverListener(OnTurnOverListener onTurnOverListener) {
+        this.onTurnOverListener = onTurnOverListener;
+    }
 
     public Game() {
         this.startWord = "балда";
@@ -21,7 +28,8 @@ public class Game {
         lastFocus = -1;
         emptyCell = false;
     }
-    public Game(String startWord, int timeForTurn, GridView gridView) {
+
+    public Game(String startWord, int timeForTurn) {
         this.startWord = startWord;
         this.rowsCount = startWord.length();
         lastFocus = -1;
@@ -82,6 +90,18 @@ public class Game {
     }
 
     public void startGame() {
+        cells = new ArrayList<>();
+        for (int i = 0; i < game.rowsCount; i++) {
+            for (int j = 0; j < game.rowsCount; j++) {
+                if (i == Math.floor(game.rowsCount / 2)) {
+                    cells.add(new Cell(game.startWord.charAt(j), false));
+                    continue;
+                }
+                cells.add(new Cell(' ', false));
+            }
+        }
+
+        CellAdapter cellAdapter = new CellAdapter(this, );
     }
 
     public void skipTurn() {
@@ -104,5 +124,10 @@ public class Game {
 
     public void stopGame() {
     }
+    interface OnTurnOverListener {
+        void onTurnOver();
+    }
 }
+
+
 

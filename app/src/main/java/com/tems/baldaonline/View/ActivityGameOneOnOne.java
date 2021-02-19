@@ -1,50 +1,75 @@
 package com.tems.baldaonline.View;
 
-import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.View;
+import android.util.Log;
 import android.widget.GridView;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.tems.baldaonline.Game;
+import com.tems.baldaonline.CellAdapter;
 import com.tems.baldaonline.R;
 
-public class ActivityGameOneOnOne extends AppCompatActivity implements View.OnClickListener {
+public class ActivityGameOneOnOne extends AppCompatActivity implements Game.OnTurnOverListener{
 
     private static final String myTag = "debugTag";
+    SharedPreferences sPref;
     private int timeForTurn;
     private String startWord;
     private String firstUserName;
     private String secondUserName;
+    private TextView tvFirstName;
+    private TextView tvSecondName;
     private GridView gridViewGameMap;
     private Game game;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_one_on_one);
-        initValues(); //инициализируем необходимые переменные
-
-
-
+        loadSettings();
+        initElements();
+        game = new Game(startWord, timeForTurn);
+        game.setOnTurnOverListener(this);
+        setFocusNameUser(firstUserName);
+        game.startGame();
     }
 
-    private void initValues() {
-        Intent intent = getIntent();
-        timeForTurn = intent.getIntExtra("time_for_turn" , 1);
-        startWord = intent.getStringExtra("start_word");
-        firstUserName = intent.getStringExtra("name_first_user");
-        secondUserName = intent.getStringExtra("name_first_user");
+    private void setFocusNameUser(String firstUserName) {
+        //полсвечивает текщего игрока
+    }
+
+    private void initElements() {
+        tvFirstName  = findViewById(R.id.activity_game_one_on_one__tv_first_user_name);
+        tvSecondName = findViewById(R.id.activity_game_one_on_one__tv_second_user_name);
+        tvFirstName.setText(firstUserName);
+        tvSecondName.setText(secondUserName);
         gridViewGameMap = findViewById(R.id.activity_game_one_on_one__gv_game_map);
-        game = new Game(startWord, timeForTurn, gridViewGameMap);
+    }
+
+
+
+    private void loadSettings() {
+        sPref = getSharedPreferences("settingsGameOneOnOne", MODE_PRIVATE);
+        firstUserName = sPref.getString("first_name_user","Первый игрок");
+        secondUserName =sPref.getString("second_name_user","Второй игрок");
+        timeForTurn = sPref.getInt("time_for_turn",2);
+        startWord = sPref.getString("start_word", "слово");
     }
 
     @Override
-    public void onClick(View v) {
-        switch (v.getId()){
-        }
+    public void onTurnOver() {
+        Log.d(myTag, "роврека");
     }
+
+    //@Override
+    //public void onClick(View v) {
+    //    switch (v.getId()){
+    //
+    //    }
+    //}
 }
 
         //gridViewGameMap = findViewById(R.id.activity_game_one_on_one__gv_game_map);
@@ -289,5 +314,6 @@ public class ActivityGameOneOnOne extends AppCompatActivity implements View.OnCl
 //        return false;
 //    }
 //
+
 
 

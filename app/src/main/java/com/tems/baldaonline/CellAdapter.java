@@ -9,6 +9,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.RequiresApi;
@@ -48,7 +49,7 @@ public class CellAdapter extends BaseAdapter {
     @SuppressLint({"ResourceAsColor", "ResourceType", "ClickableViewAccessibility"})
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        TextView textView;
+        ImageView ;
 
         if (convertView == null) {
             // количество столбцов у поля игрового
