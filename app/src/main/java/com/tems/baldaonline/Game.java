@@ -133,7 +133,7 @@ public class Game {
     public void stopGame() {
     }
 
-    interface OnTurnOverListener {
+    public interface OnTurnOverListener {
         void onTurnOver();
     }
 }
