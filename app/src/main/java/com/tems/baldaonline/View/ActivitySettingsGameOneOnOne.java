@@ -35,13 +35,18 @@ public class ActivitySettingsGameOneOnOne extends AppCompatActivity implements V
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setings_game_one_on_one);
-
         initElements();
         loadSettings();
+        spinnerSizePole.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                edtTxtStartWord.setText(getRandomWord(position + 3));
+            }
 
-
-
-
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
     }
 
     private void initElements() {
@@ -61,16 +66,6 @@ public class ActivitySettingsGameOneOnOne extends AppCompatActivity implements V
 
         CustomAdapterSpinner adapterSizePole = new CustomAdapterSpinner(this, R.layout.spinner_item, R.id.spinner_item_tv, getResources().getStringArray(R.array.spinner_size_pole));
         spinnerSizePole.setAdapter(adapterSizePole);
-        spinnerSizePole.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                edtTxtStartWord.setText(getRandomWord(position + 3));
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-            }
-        });
 
     }
 

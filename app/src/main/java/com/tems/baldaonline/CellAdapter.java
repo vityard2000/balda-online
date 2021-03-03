@@ -45,29 +45,25 @@ public class CellAdapter extends BaseAdapter {
         return position;
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.M)
-    @SuppressLint({"ResourceAsColor", "ResourceType", "ClickableViewAccessibility"})
+
+    @SuppressLint({"ClickableViewAccessibility", "ViewHolder"})
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         TextView textView;
-        if (convertView == null) {
-            textView = (TextView) context.getLayoutInflater().inflate(R.layout.cell_item, parent,
-                    false).findViewById(R.id.cell_item_tv);
-        }
-        else {
-            textView = (TextView) convertView;
-        }
-
         int rowsCount= (int) Math.sqrt(cells.size());
         int offset = (int) context.getResources().getDimension(R.dimen.sizePaddingGameMap);
-
         int heightCell = parent.getWidth() / rowsCount - offset;
-        textView.setText(Character.toString(cells.get(position).getLetter()).toUpperCase());
+
+        textView = (TextView) context.getLayoutInflater().inflate(R.layout.cell_item, parent, false).findViewById(R.id.cell_item_tv);
+        Character letter = cells.get(position).getLetter();
         textView.setHeight(heightCell);
         textView.setOnTouchListener((v, event) -> false);
-        textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, heightCell);
-        textView.setId(position);
+        if(letter!=null){
+            textView.setText(cells.get(position).getLetter().toString());
+            textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, heightCell);
+        }
 
+        textView.setId(position);
         return textView;
     }
 }

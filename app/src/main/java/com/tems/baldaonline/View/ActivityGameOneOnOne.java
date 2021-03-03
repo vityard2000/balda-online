@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.tems.baldaonline.Game;
 import com.tems.baldaonline.R;
 
 public class ActivityGameOneOnOne extends AppCompatActivity implements View.OnClickListener {
