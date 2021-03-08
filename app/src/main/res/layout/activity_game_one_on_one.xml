@@ -7,20 +7,18 @@
     tools:context=".View.ActivityGameOneOnOne"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <FrameLayout
+    <LinearLayout
         android:id="@+id/activity_game_one_on_one__lnr_lt_names"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/style_solid_corners_blue"
+        android:background="@drawable/style_solid_corners_dark_blue"
         android:layout_margin="@dimen/margin_between_elements"
         app:layout_constraintTop_toTopOf="parent">
         <TextView
             android:id="@+id/activity_game_one_on_one__tv_first_user_name"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/height_elements"
-            android:layout_gravity="left"
-            android:background="@drawable/style_solid_corners_blue"
-            android:backgroundTint="#10404D"
+            android:layout_weight="50"
             android:gravity="left|center_vertical"
             android:paddingLeft="@dimen/radius_bt"
             android:paddingRight="25dp"
@@ -32,7 +30,7 @@
             android:id="@+id/activity_game_one_on_one__tv_second_user_name"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/height_elements"
-            android:layout_gravity="right"
+            android:layout_weight="50"
             android:gravity="right|center_vertical"
             android:paddingRight="@dimen/radius_bt"
             android:paddingLeft="25dp"
@@ -40,7 +38,7 @@
             android:fontFamily="@font/gost_type"
             android:textSize="25sp"
             android:textAllCaps="false"/>
-    </FrameLayout>
+    </LinearLayout>
 
     <ImageButton
         android:id="@+id/activity_game_one_on_one__img_bt_home"
@@ -88,9 +86,9 @@
         app:layout_constraintBottom_toTopOf="@id/activity_game_one_on_one__gv_game_map">
 
         <TextView
+            android:id="@+id/activity_game_one_on_one__tv_count_first_user"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
-            android:text="10"
             android:layout_gravity="left|center_vertical"
             android:gravity="center"
             android:textColor="@color/white"
@@ -110,9 +108,9 @@
             android:textAllCaps="false"
             />
         <TextView
+            android:id="@+id/activity_game_one_on_one__tv_count_second_user"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
-            android:text="12"
             android:layout_gravity="right|center_vertical"
             android:gravity="center"
             android:textColor="@color/white"

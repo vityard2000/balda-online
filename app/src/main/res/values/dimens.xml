@@ -7,4 +7,6 @@
     <dimen name="height_elements">50dp</dimen>
     <dimen name="size_text">30sp</dimen>
     <dimen name="width_button">300dp</dimen>
+    <dimen name="keyboard_margin">3dp</dimen>
+    <dimen name="keyboard_height">60dp</dimen>
 </resources>

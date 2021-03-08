@@ -11,7 +11,7 @@ public class Cell {
     public Character getLetter() {
         return letter;
     }
-    public void setLetter(char letter) {
+    public void setLetter(Character letter) {
         this.letter = letter;
     }
 }
