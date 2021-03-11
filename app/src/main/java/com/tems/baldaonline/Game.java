@@ -12,7 +12,6 @@ import java.util.List;
 
 public class Game {
     private static final String myTag = "debugTag";
-
     private final Activity context;
     private int currentUser;
     private static final int FIRST_USER  = 0;
@@ -109,14 +108,14 @@ public class Game {
 
                                 if(onEnterWordListener.onEnterWord(word.toString())) {
                                     if(true) {//есть ли слово в словаре
-                                        List<Cell> wordCells = new ArrayList<>();
-                                        for (int i : numsCells) wordCells.add(cells.get(i));
+                                        List<Cell> listCell = new ArrayList<>();
+                                        for (int i : numsCells) listCell.add(cells.get(i));
+                                        WordCell wordCell = new WordCell(listCell);
                                         // смена игрока
-
                                         if (currentUser == FIRST_USER) {
-                                            firstGameUser.setWord(wordCells);
+                                            firstGameUser.setWord(wordCell);
                                         } else {
-                                            secondGameUser.setWord(wordCells);
+                                            secondGameUser.setWord(wordCell);
                                         }
 
                                         onAddWordInDictionary.onAddWordInDictionary(word);
@@ -238,6 +237,7 @@ public class Game {
     }
 
     public void setLetter(Character letter) {
+
         TextView textView = ((TextView) gridViewGameMap.getChildAt(numClickEmptyCell));
 
         if(letter != null) {

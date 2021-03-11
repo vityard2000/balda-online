@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="radius_bt">25dp</dimen>
-    <dimen name="margin_between_elements">5dp</dimen>
+    <dimen name="margin_between_elements">3dp</dimen>
     <dimen name="sizePaddingGameMap">2dp</dimen>
     <dimen name="sizeTextOnMapeMap">20dp</dimen>
     <dimen name="height_elements">50dp</dimen>
@@ -9,4 +9,5 @@
     <dimen name="width_button">300dp</dimen>
     <dimen name="keyboard_margin">3dp</dimen>
     <dimen name="keyboard_height">60dp</dimen>
+    <dimen name="activity_margin">10dp</dimen>
 </resources>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/style_solid_corners_green"
+        android:orientation="horizontal"
+        android:paddingLeft="15dp"
+        android:layout_gravity="start"
+        android:layout_marginTop="@dimen/margin_between_elements">
+        <TextView
+            android:id="@+id/list_item__tv_first_word"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:fontFamily="@font/gost_type"
+            android:textSize="24sp"
+            android:layout_marginRight="5dp"/>
+        <TextView
+            android:id="@+id/list_item__tv_first_cnt"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:minWidth="35dp"
+            android:paddingHorizontal="12dp"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:fontFamily="@font/gost_type"
+            android:textSize="24sp" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/style_solid_corners_green"
+        android:orientation="horizontal"
+        android:paddingRight="15dp"
+        android:layout_gravity="end"
+        android:layout_marginTop="@dimen/margin_between_elements">
+        <TextView
+            android:id="@+id/list_item__tv_second_cnt"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:minWidth="35dp"
+            android:paddingHorizontal="12dp"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:fontFamily="@font/gost_type"
+            android:textSize="24sp" />
+        <TextView
+            android:id="@+id/list_item__tv_second_word"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:fontFamily="@font/gost_type"
+            android:textSize="24sp"
+            android:layout_marginLeft="5dp"/>
+
+    </LinearLayout>
+
+
+</FrameLayout>

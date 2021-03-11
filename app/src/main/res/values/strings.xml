@@ -1,12 +1,7 @@
 <resources>
     <string name="app_name">Balda Online</string>
     <string name="string_name_game">Балда</string>
-    <string name="activity_main__tv_1">текст</string>
-    <string name="activity_main__bt_1">Save</string>
-    <string name="activity_main__bt_2">Load</string>
-    <string name="activity_main__bt_to_activity_two">Перейти в другое активити</string>
     <string name="activity_two__bt_to_activity_main">Назад</string>
-    <string name="activity_two__bt1">Показать на карте</string>
     <string name="activity_menu__bt_online_game">Найти пару</string>
     <string name="activity_menu__bt_joint_game">Играть двоем</string>
     <string name="activity_menu__bt_bot_game">Играть с ботом</string>
@@ -16,11 +11,8 @@
     <string name="activity_registration__bt_registration">Регистация</string>
     <string name="activity_registration__bt_google">Google</string>
     <string name="activity_settings_game_one_on_one__start_word">Начальное слово</string>
-    <string name="activity_settings_game_one_on_one__first_name_game">Первый игрок</string>
-    <string name="activity_settings_game_one_on_one__second_name_game">Второй игрок</string>
     <string name="activity_settings_game_one_on_one__size_pole">Размер поля</string>
-    <string name="activity_settings_game_one_on_one__time_for_turn">Время наход</string>
-    <string name="activity_settings_game_one_on_one__edt_txt_start_word">СЛОВО</string>
+    <string name="activity_settings_game_one_on_one__time_for_turn">Время на ход</string>
     <string name="activity_settings_game_one_on_one__random_word">Случайное слово</string>
     <string name="activity_settings_game_one_on_one__begin">Начать</string>
     <string-array name="spinner_size_pole">
