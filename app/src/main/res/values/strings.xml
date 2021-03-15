@@ -3,7 +3,7 @@
     <string name="string_name_game">Балда</string>
     <string name="activity_two__bt_to_activity_main">Назад</string>
     <string name="activity_menu__bt_online_game">Найти пару</string>
-    <string name="activity_menu__bt_joint_game">Играть двоем</string>
+    <string name="activity_menu__bt_joint_game">Играть вдвоем</string>
     <string name="activity_menu__bt_bot_game">Играть с ботом</string>
     <string name="activity_menu__bt_friends">Друзья</string>
     <string name="activity_menu__bt_shop">Магазин</string>

@@ -25,18 +25,26 @@ public class WordCell {
 
     @Override
     public String toString() {
-        String str = "";
+        StringBuilder str = new StringBuilder();
+        for (Cell i : word){str.append(i.getLetter());};
+        return str.toString();
+    }
+    public String toStringNormal() {
+        StringBuilder str = new StringBuilder();
         int cnt = 0;
         for (Cell i : word){
             if(cnt == 0){
-                str += i.getLetter();
-            }else str += i.getLetter().toString().toLowerCase();
+                str.append(i.getLetter());
+            }else str.append(i.getLetter().toString().toLowerCase());
             cnt++;
         };
-        return str;
+        return str.toString();
     }
 
     public int size() {
         return word.size();
+    }
+    public void add(Cell cell){
+        word.add(cell);
     }
 }

@@ -37,6 +37,7 @@ public class ActivitySettingsGameOneOnOne extends AppCompatActivity implements V
     private EditText edtTxtSecondNameUser;
     private EditText edtTxtStartWord;
     private SharedPreferences sPref;
+    private boolean flag = false;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -48,20 +49,16 @@ public class ActivitySettingsGameOneOnOne extends AppCompatActivity implements V
         spinnerSizePole.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                edtTxtStartWord.setText(getRandomWord(position + 3));
+                if(flag) edtTxtStartWord.setText(getRandomWord(position + 3));
+                else flag = true;
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
-        edtTxtStartWord.setOnCapturedPointerListener(new View.OnCapturedPointerListener() {
-            @Override
-            public boolean onCapturedPointer(View view, MotionEvent event) {
-                Log.d(myTag,"едитор: ");
-                return false;
-            }
-        });
+
+
     }
 
     private void initElements() {
@@ -72,20 +69,21 @@ public class ActivitySettingsGameOneOnOne extends AppCompatActivity implements V
         btRandom             = findViewById(R.id.activity_settings_game_one_on_one__bt_random_word);
         spinnerSizePole      = findViewById(R.id.activity_settings_game_one_on_one_spinner_size_pole);
         spinnerTimeForTurn   = findViewById(R.id.activity_settings_game_one_on_one__spinner_time_for_turn);
-        edtTxtFirstNameUser.setText(firstUserName);
-        edtTxtSecondNameUser.setText(secondUserName);
-        Log.d(myTag, startWord);
-        spinnerTimeForTurn.setSelection(timeForTurn);
-        spinnerSizePole.setSelection(startWord.length()-3);
-        edtTxtStartWord.setText(startWord);
         btBegin.setOnClickListener(this);
         btRandom.setOnClickListener(this);
 
         CustomAdapterSpinner adapterTime = new CustomAdapterSpinner(this, R.layout.spinner_item, R.id.spinner_item_tv, getResources().getStringArray(R.array.spinner_time_ror_turn));
         spinnerTimeForTurn.setAdapter(adapterTime);
-
         CustomAdapterSpinner adapterSizePole = new CustomAdapterSpinner(this, R.layout.spinner_item, R.id.spinner_item_tv, getResources().getStringArray(R.array.spinner_size_pole));
         spinnerSizePole.setAdapter(adapterSizePole);
+
+        spinnerSizePole.setSelection((startWord.length()<=7)? startWord.length()-3: 2);
+
+        edtTxtFirstNameUser.setText(firstUserName);
+        edtTxtSecondNameUser.setText(secondUserName);
+        edtTxtStartWord.setText(startWord);
+        spinnerTimeForTurn.setSelection(timeForTurn);
+
 
     }
 
@@ -99,12 +97,10 @@ public class ActivitySettingsGameOneOnOne extends AppCompatActivity implements V
                     saveSettings();
                     startActivity(new Intent(this, ActivityGameOneOnOne.class));
                 }
-
                 break;
             case R.id.activity_settings_game_one_on_one__bt_random_word:
                 edtTxtStartWord.setText(getRandomWord(spinnerSizePole.getSelectedItemPosition() + 3));
                 break;
-
         }
     }
 
@@ -114,11 +110,10 @@ public class ActivitySettingsGameOneOnOne extends AppCompatActivity implements V
 
     private void loadSettings() {
         sPref = getSharedPreferences("settingsGameOneOnOne", MODE_PRIVATE);
-        firstUserName = sPref.getString("first_name_user","Первый игрок");
+        firstUserName  = sPref.getString("first_name_user","Первый игрок");
         secondUserName = sPref.getString("second_name_user","Второй игрок");
-        timeForTurn = sPref.getInt("time_for_turn",2);
-        startWord = sPref.getString("start_word", getRandomWord(5));
-        Log.d(myTag, "загрузилось");
+        timeForTurn    = sPref.getInt("time_for_turn",2);
+        startWord      = sPref.getString("start_word", getRandomWord(5));
     }
 
     private String getRandomWord(int sizeWord) {

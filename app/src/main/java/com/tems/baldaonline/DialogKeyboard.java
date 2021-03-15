@@ -18,14 +18,22 @@ import androidx.appcompat.app.AppCompatDialogFragment;
 import com.tems.baldaonline.View.ActivityGameOneOnOne;
 
 public class DialogKeyboard extends AppCompatDialogFragment implements View.OnClickListener {
-    private static final String myTag    = "debugTag";
+    @Override
+    public void onDismiss(@NonNull DialogInterface dialog) {
+        super.onDismiss(dialog);
+
+        ((ActivityGameOneOnOne) getActivity()).setLetter(letter);
+
+    }
+
+    private static final String myTag = "debugTag";
     private Character letter;
     private Dialog dialog;
 
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        letter = null;
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.keyboard, null);
         Button btA = (Button) view.findViewById(R.id.keyboard__bt_A);
@@ -93,12 +101,10 @@ public class DialogKeyboard extends AppCompatDialogFragment implements View.OnCl
         Button btIA = (Button) view.findViewById(R.id.keyboard__bt_IA);
         btIA.setOnClickListener(this);
         Button btCancel = (Button) view.findViewById(R.id.keyboard__bt_cancel);
-        btCancel.setOnClickListener(this);
 
-
-        builder.setCancelable(true);
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setView(view);
-
+        btCancel.setOnClickListener(this);
         return builder.create();
     }
     @Override
@@ -203,11 +209,6 @@ public class DialogKeyboard extends AppCompatDialogFragment implements View.OnCl
             default:
                 letter = null;
         }
-        ((ActivityGameOneOnOne) getActivity()).setLetter(letter);
-
         dismiss();
     }
-
-
-
 }

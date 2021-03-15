@@ -22,7 +22,7 @@ public class ListAdapter extends BaseAdapter{
 
     @Override
     public int getCount() {
-        return Math.max(first.size(), second.size());
+        return Math.max(first.size(), second.size())+1;
     }
 
     @Override
@@ -51,7 +51,7 @@ public class ListAdapter extends BaseAdapter{
             }else{
                 tvFirstCount.setBackgroundResource(R.drawable.style_solid_corners_purple);
             }
-            String firstWord = first.get(position).toString();
+            String firstWord = first.get(position).toStringNormal();
             tvFirstWord.setText(firstWord);
             tvFirstCount.setText(String.valueOf(firstWord.length()));
             tvFirstWord.setVisibility(View.VISIBLE);
@@ -71,7 +71,7 @@ public class ListAdapter extends BaseAdapter{
             }else{
                 tvSecondCount.setBackgroundResource(R.drawable.style_solid_corners_purple);
             }
-            String secondWord = second.get(position).toString();
+            String secondWord = second.get(position).toStringNormal();
             tvSecondWord.setText(secondWord);
             tvSecondCount.setText(String.valueOf(secondWord.length()));
             tvSecondWord.setVisibility(View.VISIBLE);

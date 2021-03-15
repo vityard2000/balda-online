@@ -1,6 +1,7 @@
 package com.tems.baldaonline.View;
 
 import android.annotation.SuppressLint;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -69,13 +70,6 @@ public class ActivityGameOneOnOne extends AppCompatActivity implements View.OnCl
         loadSettings();
         initElements();
 
-        // массивы данных
-        final String ATTRIBUTE_NAME_FIRST_WORD = "first_word";
-        final String ATTRIBUTE_NAME_SECOND_WORD = "second_word";
-        final String ATTRIBUTE_NAME_FIRST_COUNT = "first_count";
-        final String ATTRIBUTE_NAME_SECOND_COUNT = "second_count";
-
-
         game = new Game(startWord, timeForTurn, this, gridViewGameMap);
 
         game.setOnClickEmptyCellListener(new Game.OnClickEmptyCellListener() {
@@ -101,7 +95,6 @@ public class ActivityGameOneOnOne extends AppCompatActivity implements View.OnCl
                     tvPointsSecondUser.setText(String.valueOf(game.getSecondGameUser().getCount()));
                     lvAdapter.notifyDataSetChanged();
                     timer.start();
-                    Log.d(myTag, "все ок");
                 }else{
                     //слова в словаре нет
                 }
@@ -109,7 +102,7 @@ public class ActivityGameOneOnOne extends AppCompatActivity implements View.OnCl
             }
         });
         game.startGame();
-        TimerInit();
+
         timer.start();
 
         lvAdapter = new ListAdapter(this, game.getFirstGameUser().getWords(), game.getSecondGameUser().getWords());
@@ -234,6 +227,7 @@ public class ActivityGameOneOnOne extends AppCompatActivity implements View.OnCl
         ImgBtSkipTurn.setOnClickListener(this);
         manager = getSupportFragmentManager();
         dialogkeyboard = new DialogKeyboard();
+        TimerInit();
         setFocusNameUser(FIRST_USER);
     }
     private void loadSettings() {
@@ -243,8 +237,6 @@ public class ActivityGameOneOnOne extends AppCompatActivity implements View.OnCl
         timeForTurn = sPref.getInt("time_for_turn",2);
         startWord = sPref.getString("start_word", "слово");
     }
-
-
 }
 
 

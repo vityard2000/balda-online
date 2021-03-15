@@ -1,14 +1,15 @@
 package com.tems.baldaonline;
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.widget.GridView;
 import android.widget.TextView;
-import android.widget.Toast;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 public class Game {
     private static final String myTag = "debugTag";
@@ -20,6 +21,7 @@ public class Game {
     private GameUser firstGameUser;
     private GameUser secondGameUser;
     private int rowsCount;
+    private int numDownEmptyCell = -1;
     private int numClickEmptyCell = -1;
     private int numEnterLetter =-1;
     private List<Cell> cells;
@@ -29,6 +31,11 @@ public class Game {
     OnAddWordInDictionaryListener onAddWordInDictionary;
     OnEnterWordListener onEnterWordListener;
     OnClickEmptyCellListener onClickEmptyCellListener;
+    private static final String WORD = "word";
+    private static final String LETTER = "letter";
+    private static final String NUM_CELL = "num_cell";
+    private static final String USER = "user";
+    ArrayList<Map<String, Object>> data;
 
     public Game(String startWord, int timeForTurn, Activity context, GridView gridViewGameMap) {
         this.context = context;
@@ -38,10 +45,15 @@ public class Game {
     @SuppressLint("ClickableViewAccessibility")
     public void startGame() {
 
-        currentUser = FIRST_USER;
-        firstGameUser = new GameUser();
+        currentUser = FIRST_USER;//устанавливаем текущего пользователя
+        firstGameUser = new GameUser(); //инициализируем игровый пользователей
         secondGameUser = new GameUser();
+        data = new ArrayList<>();
 
+        WordCell start_word = new WordCell();
+       // for (int i = 0; i < startWord.length(); i ++) start_word.add(startWord.charAt(i)); // формируем слово
+
+       // data.add(createMapData(startWord, null, null , null));
         rowsCount = startWord.length();
         gridViewGameMap.setNumColumns(rowsCount);
         numsCells = new LinkedList<>();
@@ -58,87 +70,72 @@ public class Game {
         }
         //заполнение поля конец
         gridViewGameMap.setOnTouchListener((v, event) -> {
-            int numCell;
+            int numCell = getNumCell(event.getX(), event.getY());
             switch (event.getAction()) {
+
                 case MotionEvent.ACTION_DOWN:
-                    numCell = getNumCell(event.getX(), event.getY());
-
                     if(numCell != -1 && cells.get(numCell).getLetter() == null && isBesideCell(numCell)) { //палец опустили на пустую cell
-                        numClickEmptyCell = numCell;
-                        gridViewGameMap.getChildAt(numCell).setBackgroundResource(R.color.bt_google_press);
+                        numDownEmptyCell = numCell; // сохраняем номер пустой cell, на которую опустили палец
+                        gridViewGameMap.getChildAt(numCell).setBackgroundResource(R.color.cell_press);
                     }
-
                     break;
                 case MotionEvent.ACTION_MOVE: // палец передвигают
-                    numCell = getNumCell(event.getX(), event.getY());
-                    if(numCell == -1) return true;
-
-                    if(numClickEmptyCell ==-1 && cells.get(numCell).getLetter()!=null&&numEnterLetter!=-1)// условия для продолжения веделения слова
+                    if(numCell != -1&& numDownEmptyCell ==-1 && cells.get(numCell).getLetter()!=null&&numEnterLetter!=-1)// условия для начала и продолжения веделения слова
                     {
                          setFocusCell(numCell);
                     }
-
                     break;
-
+                case MotionEvent.ACTION_CANCEL:
                 case MotionEvent.ACTION_UP:
-                    numCell = getNumCell(event.getX(), event.getY());
-                    if(numClickEmptyCell !=-1){ // если опустили палец на пустую cell
-                        if(numCell == numClickEmptyCell) { // если подняли палец с той же пустой cell, на которую палец опустили
-
+                    if(numDownEmptyCell !=-1){ // если опустили палец на пустую cell
+                        if(numCell == numDownEmptyCell) { // если подняли палец с той же пустой cell, на которую палец опустили
+                            numClickEmptyCell = numDownEmptyCell;
                             onClickEmptyCellListener.onClickEmptyCell();
-
                         } else {
-                            gridViewGameMap.getChildAt(numClickEmptyCell).setBackgroundResource(R.color.white);
+                            gridViewGameMap.getChildAt(numDownEmptyCell).setBackgroundResource(R.color.white);
                         }
+                    } else if (lastNumCell!=-1&&numsCells.size()!=1&&lastNumCell == numCell) {//если опустили палец на cell, которая была последняя выделенная в слове
+                            boolean flag = false; // флаг для проверки есть ли введенная буква в введенном слове
 
-                        //numClickEmptyCell = -1;
-                    } else {
+                            WordCell word = new WordCell();
+                            for (int i : numsCells) word.add(cells.get(i)); // формируем слово
 
-                        if (lastNumCell!=-1&&lastNumCell == numCell) {
-                            boolean flag = false;
-                            String word = "";
-                            for (int i : numsCells){
-                                word += cells.get(i).getLetter();
-                                if(i == numEnterLetter){
-                                    flag = true;
-                                }
-                            };
+                            for (int i : numsCells)  flag = (i == numEnterLetter) || flag; //проверка есть ли введенная буква в слове
+
                             if(flag){
-                                numEnterLetter= -1;
+                                numEnterLetter= -1; // обнуляем номер нажатой ячейки
+                                if(onEnterWordListener.onEnterWord(word.toString())) { // спрашиваем нравится ли слово нашему активити
+                                    if(true) {  //есть ли слово в словаре
+                                        if (currentUser == FIRST_USER) {// сохраняем введенное слово///////////////////////////////////////////////////////////////////////////////////
+                                            firstGameUser.setWord(word);
+                                            data.add(createMapData(word, null, null , currentUser));
 
-                                if(onEnterWordListener.onEnterWord(word.toString())) {
-                                    if(true) {//есть ли слово в словаре
-                                        List<Cell> listCell = new ArrayList<>();
-                                        for (int i : numsCells) listCell.add(cells.get(i));
-                                        WordCell wordCell = new WordCell(listCell);
-                                        // смена игрока
-                                        if (currentUser == FIRST_USER) {
-                                            firstGameUser.setWord(wordCell);
                                         } else {
-                                            secondGameUser.setWord(wordCell);
+                                            secondGameUser.setWord(word);
                                         }
-
-                                        onAddWordInDictionary.onAddWordInDictionary(word);
-                                        currentUser = (currentUser == FIRST_USER)?SECOND_USER:FIRST_USER;
-                                        Toast.makeText(context, word, Toast.LENGTH_LONG).show();
+                                        onAddWordInDictionary.onAddWordInDictionary(word.toString()); //говорим, что слово есть в бд
+                                        currentUser = (currentUser == FIRST_USER)?SECOND_USER:FIRST_USER; // меняем пользователя
                                     } else{
-                                        onAddWordInDictionary.onAddWordInDictionary(null);
+                                        onAddWordInDictionary.onAddWordInDictionary(null); // говорим, что слова нет в бд
                                     }
-
                                 }
                             }
-
-
-
                         }
-
-                    }
                     removeFocusCells();
                     break;
             }
             return true;
         });
         gridViewGameMap.setAdapter(new CellAdapter(context, cells));
+    }
+
+    private Map<String, Object> createMapData(WordCell word, Character letter, Integer num_cell, Integer user) {
+        Map<String, Object> turn = new HashMap<>(); //
+        turn.put(WORD, word);
+        turn.put(LETTER, letter);
+        turn.put(NUM_CELL, num_cell);
+        turn.put(USER, user);
+        return  turn;
     }
 
     private boolean isBesideCell(int cell) { //есть ли рядом cell с буквой
@@ -167,6 +164,7 @@ public class Game {
     }
     // снимаем фокус со всех ячеек. убираем в game последний фокус и наличае выделенной пустой ячейки
     private void removeFocusCells() {
+        numDownEmptyCell = -1;
         lastNumCell = -1;
         for (int i:numsCells) gridViewGameMap.getChildAt(i).setBackgroundResource(R.color.white);
         numsCells.clear();
@@ -189,7 +187,7 @@ public class Game {
             {
                 numsCells.add(numCell);
                 lastNumCell = numCell;
-                gridViewGameMap.getChildAt(numCell).setBackgroundResource(R.color.bt_google_press);         //выделяем cell
+                gridViewGameMap.getChildAt(numCell).setBackgroundResource(R.color.cell_press);         //выделяем cell
 
             }
         }
@@ -237,6 +235,13 @@ public class Game {
     }
 
     public void setLetter(Character letter) {
+
+        Map<String, Object> turn = new HashMap<>();
+        turn.put(WORD, startWord);
+        turn.put(LETTER, null);
+        turn.put(NUM_CELL, null);
+        turn.put(USER, null);
+        data.add(turn);
 
         TextView textView = ((TextView) gridViewGameMap.getChildAt(numClickEmptyCell));
 
