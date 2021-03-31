@@ -6,23 +6,23 @@ import java.util.List;
 public class GameUser {
 
     private int count;
-    private List<WordCell> words;
+    private List<String> words;
 
     public GameUser(){
-        words = new ArrayList<WordCell>();
+        words = new ArrayList<String>();
         count = 0;
     }
 
-    public void setWord(WordCell wordCell) {
-        words.add(wordCell);
-        count += wordCell.size();
+    public void setWord(String word) {
+        words.add(word);
+        count += word.length();
     }
 
     public int getCount(){
         return count;
     }
 
-    public List<WordCell> getWords(){
+    public List<String> getWords(){
         return words;
     }
 }

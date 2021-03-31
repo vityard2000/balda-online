@@ -1,39 +1,27 @@
 package com.tems.baldaonline.View;
 
 import android.annotation.SuppressLint;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.GridView;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.SimpleAdapter;
 import android.widget.TextView;
-
 import androidx.appcompat.app.AppCompatActivity;
-
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.FragmentManager;
 
-
+import com.tems.baldaonline.DBHelperGameData;
 import com.tems.baldaonline.DialogKeyboard;
+import com.tems.baldaonline.DialogYesNo;
 import com.tems.baldaonline.Game;
 import com.tems.baldaonline.ListAdapter;
 import com.tems.baldaonline.R;
 
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-
-public class ActivityGameOneOnOne extends AppCompatActivity implements View.OnClickListener {
+public class ActivityGameOneOnOne extends AppCompatActivity implements View.OnClickListener{
 
     private static final String myTag    = "debugTag";
     private static final int FIRST_USER  = 0;
@@ -70,44 +58,78 @@ public class ActivityGameOneOnOne extends AppCompatActivity implements View.OnCl
         loadSettings();
         initElements();
 
-        game = new Game(startWord, timeForTurn, this, gridViewGameMap);
+        dialogkeyboard = new DialogKeyboard(new DialogKeyboard.OnClickKyeListener() {
+            @Override
+            public void onClickKye(Character c) {
+                game.setLetter(c);
+            }
+        });
+
+        game = new Game(this,gridViewGameMap, startWord, getIntent().getBooleanExtra("isSaveGame", false));
 
         game.setOnClickEmptyCellListener(new Game.OnClickEmptyCellListener() {
             @Override
             public void onClickEmptyCell() {
-                        dialogkeyboard.show(manager, "dialog");
+                dialogkeyboard.show(manager, "dialog");
             }
         });
-        game.setOnEnterWordListener(new Game.OnEnterWordListener() {
-            @Override
-            public boolean onEnterWord(String word) {
-                if (true) {//спросить оставить слово или нет
-                    return true;
-                } else return false;
 
-            }
-        });
         game.setOnAddWordInDictionary(new Game.OnAddWordInDictionaryListener() {
-            public void onAddWordInDictionary(String word) {
-                if(word != null){
+            public void onAddWordInDictionary() {
                     setFocusNameUser(CHANGE_USER);
-                    tvPointsFirstUser.setText(String.valueOf(game.getFirstGameUser().getCount()));
-                    tvPointsSecondUser.setText(String.valueOf(game.getSecondGameUser().getCount()));
+                    tvPointsFirstUser.setText(String.valueOf(game.getFirstUser().getCount()));
+                    tvPointsSecondUser.setText(String.valueOf(game.getSecondUser().getCount()));
                     lvAdapter.notifyDataSetChanged();
                     timer.start();
-                }else{
-                    //слова в словаре нет
-                }
-
             }
         });
-        game.startGame();
 
+
+        game.startGame();
+        setFocusNameUser(game.getCurrentUser());
+        tvPointsFirstUser.setText(String.valueOf(game.getFirstUser().getCount()));
+        tvPointsSecondUser.setText(String.valueOf(game.getSecondUser().getCount()));
+        TimerInit();
         timer.start();
 
-        lvAdapter = new ListAdapter(this, game.getFirstGameUser().getWords(), game.getSecondGameUser().getWords());
+        lvAdapter = new ListAdapter(this, game.getFirstUser(), game.getSecondUser());
         lvWords.setAdapter(lvAdapter);
 
+    }
+
+    @Override
+    protected void onDestroy() {
+        game.destroyGame();
+        super.onDestroy();
+    }
+
+    @SuppressLint("NonConstantResourceId")
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.activity_game_one_on_one__img_bt_home:
+
+                Intent intent= new Intent(this, ActivityMenu.class);
+                new DialogYesNo(null, new DialogYesNo.OnClickListener() {
+                    @Override
+                    public void onClick() {
+                        game.destroyGame();
+                        startActivity(intent);
+                    }
+                }, "Выйти в главное меню?").show(manager, "tagp");
+
+                break;
+            case R.id.activity_game_one_on_one__img_bt_skip_turn:
+                new DialogYesNo(null, new DialogYesNo.OnClickListener() {
+                    @Override
+                    public void onClick() {
+                        setFocusNameUser(CHANGE_USER);
+                        game.skipTurn();
+                        timer.start();
+                    }
+                }, "Пропустить ход?").show(manager, "tagp");
+                break;
+        }
     }
 
     private void TimerInit() {
@@ -138,16 +160,15 @@ public class ActivityGameOneOnOne extends AppCompatActivity implements View.OnCl
                 break;
 
         }
-
         timer = new CountDownTimer(time, 1000) {
 
-            //Здесь обновляем текст счетчика обратного отсчета с каждой секундой
+
             public void onTick(long millisUntilFinished) {
                 long s = (millisUntilFinished/1000)%60;
                 long m = (millisUntilFinished/1000)/60;
                 tvTimeForTurn.setText(String.format("%02d:%02d", m, s));
             }
-            //Задаем действия после завершения отсчета (высвечиваем надпись "Бабах!"):
+
             public void onFinish() {
                 setFocusNameUser(CHANGE_USER);
                 game.skipTurn();
@@ -156,29 +177,6 @@ public class ActivityGameOneOnOne extends AppCompatActivity implements View.OnCl
         };
 
 
-    }
-
-
-    public void setLetter(Character c){
-        game.setLetter(c);
-    }
-
-
-    @SuppressLint("NonConstantResourceId")
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.activity_game_one_on_one__img_bt_home:
-                startActivity(new Intent(this, ActivityMenu.class));
-                break;
-            case R.id.activity_game_one_on_one__img_bt_skip_turn:
-
-                setFocusNameUser(CHANGE_USER);
-                game.skipTurn();
-                timer.start();
-
-                break;
-        }
     }
 
     private void setFocusNameUser(int mode) {
@@ -219,16 +217,16 @@ public class ActivityGameOneOnOne extends AppCompatActivity implements View.OnCl
         secondButtonClock  = findViewById(R.id.activity_game_one_on_one__v_second_button_clock);
         firstButtonClock   = findViewById(R.id.activity_game_one_on_one__v_first_button_clock);
         lvWords            = findViewById(R.id.activity_game_one_on_one__lv_words);
-        tvPointsFirstUser.setText(String.valueOf(0));
-        tvPointsSecondUser.setText(String.valueOf(0));
+
         tvSecondName.setText(secondUserName);
         tvFirstName.setText(firstUserName);
         ImgBtHome.setOnClickListener(this);
         ImgBtSkipTurn.setOnClickListener(this);
+
         manager = getSupportFragmentManager();
-        dialogkeyboard = new DialogKeyboard();
-        TimerInit();
-        setFocusNameUser(FIRST_USER);
+
+
+
     }
     private void loadSettings() {
         sPref = getSharedPreferences("settingsGameOneOnOne", MODE_PRIVATE);
@@ -236,6 +234,12 @@ public class ActivityGameOneOnOne extends AppCompatActivity implements View.OnCl
         secondUserName =sPref.getString("second_name_user","Второй игрок");
         timeForTurn = sPref.getInt("time_for_turn",2);
         startWord = sPref.getString("start_word", "слово");
+    }
+
+    public void createNewGame() {
+        game.destroyGame();
+        Intent intent = new Intent(this, ActivitySettingsGameOneOnOne.class);
+        startActivity(intent);
     }
 }
 

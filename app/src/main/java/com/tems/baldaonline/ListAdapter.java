@@ -2,32 +2,37 @@ package com.tems.baldaonline;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
-import java.util.List;
+
+import com.tems.baldaonline.View.ActivityGameOneOnOne;
+
+import java.util.ArrayList;
+import java.util.Map;
 
 
 public class ListAdapter extends BaseAdapter{
-    private List<WordCell> first;
-    private List<WordCell> second;
     private Activity context;
+    public GameUser firstUser;
+    public GameUser secondUser;
 
-    public ListAdapter(Activity context, List<WordCell> first, List<WordCell> second) {
+    public ListAdapter(Activity context, GameUser firstUser, GameUser secondUser) {
         this.context = context;
-        this.first = first;
-        this.second = second;
+        this.firstUser = firstUser;
+        this.secondUser = secondUser;
     }
 
     @Override
     public int getCount() {
-        return Math.max(first.size(), second.size())+1;
+        return Math.max(firstUser.getWords().size() , secondUser.getWords().size())+1;
     }
 
     @Override
     public Object getItem(int position) {
-        return first.get(position);
+        return firstUser.getWords().get(position);
     }
 
     @Override
@@ -45,13 +50,14 @@ public class ListAdapter extends BaseAdapter{
         TextView tvSecondWord = (TextView)  convertView.findViewById(R.id.list_item__tv_second_word);
         TextView tvFirstCount = (TextView) convertView.findViewById(R.id.list_item__tv_first_cnt);
         TextView tvSecondCount = (TextView)  convertView.findViewById(R.id.list_item__tv_second_cnt);
-        if(first.size() >= position + 1){
+
+        if(firstUser.getWords().size() >= position + 1){
             if(position%2==1){
                 tvFirstCount.setBackgroundResource(R.drawable.style_solid_corners_pink);
             }else{
                 tvFirstCount.setBackgroundResource(R.drawable.style_solid_corners_purple);
             }
-            String firstWord = first.get(position).toStringNormal();
+            String firstWord = firstUser.getWords().get(position);
             tvFirstWord.setText(firstWord);
             tvFirstCount.setText(String.valueOf(firstWord.length()));
             tvFirstWord.setVisibility(View.VISIBLE);
@@ -65,13 +71,13 @@ public class ListAdapter extends BaseAdapter{
             tvFirstCount.setVisibility(View.GONE);
         }
 
-        if(second.size() >= position + 1){
+        if(secondUser.getWords().size() >= position + 1){
             if(position%2==1){
                 tvSecondCount.setBackgroundResource(R.drawable.style_solid_corners_pink);
             }else{
                 tvSecondCount.setBackgroundResource(R.drawable.style_solid_corners_purple);
             }
-            String secondWord = second.get(position).toStringNormal();
+            String secondWord = secondUser.getWords().get(position);
             tvSecondWord.setText(secondWord);
             tvSecondCount.setText(String.valueOf(secondWord.length()));
             tvSecondWord.setVisibility(View.VISIBLE);

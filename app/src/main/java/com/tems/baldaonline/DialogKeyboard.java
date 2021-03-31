@@ -2,6 +2,8 @@ package com.tems.baldaonline;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -18,17 +20,29 @@ import androidx.appcompat.app.AppCompatDialogFragment;
 import com.tems.baldaonline.View.ActivityGameOneOnOne;
 
 public class DialogKeyboard extends AppCompatDialogFragment implements View.OnClickListener {
-    @Override
-    public void onDismiss(@NonNull DialogInterface dialog) {
-        super.onDismiss(dialog);
-
-        ((ActivityGameOneOnOne) getActivity()).setLetter(letter);
-
-    }
 
     private static final String myTag = "debugTag";
     private Character letter;
-    private Dialog dialog;
+    private OnClickKyeListener onClickKyeListener;
+
+    public DialogKeyboard(OnClickKyeListener onClickKyeListener){
+        this.onClickKyeListener = onClickKyeListener;
+    }
+
+    public void onResume() {
+        super.onResume();
+        getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+    }
+
+    @Override
+    public void onDismiss(@NonNull DialogInterface dialog) {
+        super.onDismiss(dialog);
+        onClickKyeListener.onClickKye(letter);
+
+    }
+
+
 
     @NonNull
     @Override
@@ -101,10 +115,10 @@ public class DialogKeyboard extends AppCompatDialogFragment implements View.OnCl
         Button btIA = (Button) view.findViewById(R.id.keyboard__bt_IA);
         btIA.setOnClickListener(this);
         Button btCancel = (Button) view.findViewById(R.id.keyboard__bt_cancel);
+        btCancel.setOnClickListener(this);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setView(view);
-        btCancel.setOnClickListener(this);
         return builder.create();
     }
     @Override
@@ -210,5 +224,8 @@ public class DialogKeyboard extends AppCompatDialogFragment implements View.OnCl
                 letter = null;
         }
         dismiss();
+    }
+    public interface OnClickKyeListener{
+        void onClickKye(Character c);
     }
 }
