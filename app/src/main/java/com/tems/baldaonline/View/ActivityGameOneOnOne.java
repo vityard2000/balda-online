@@ -3,22 +3,22 @@ package com.tems.baldaonline.View;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.util.Log;
 import android.view.View;
 import android.widget.GridView;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 
-import com.tems.baldaonline.DBHelperGameData;
 import com.tems.baldaonline.DialogKeyboard;
 import com.tems.baldaonline.DialogYesNo;
 import com.tems.baldaonline.Game;
-import com.tems.baldaonline.ListAdapter;
+import com.tems.baldaonline.AdapterList;
 import com.tems.baldaonline.R;
 
 public class ActivityGameOneOnOne extends AppCompatActivity implements View.OnClickListener{
@@ -32,6 +32,8 @@ public class ActivityGameOneOnOne extends AppCompatActivity implements View.OnCl
     private String startWord;
     private String firstUserName;
     private String secondUserName;
+    private String colorOne;
+    private String colorTwo;
     private ImageButton ImgBtHome;
     private ImageButton ImgBtSkipTurn;
     private TextView tvFirstName;
@@ -47,8 +49,11 @@ public class ActivityGameOneOnOne extends AppCompatActivity implements View.OnCl
     private FragmentManager manager;
     private DialogKeyboard dialogkeyboard;
     private ListView lvWords;
-    private ListAdapter lvAdapter;
-
+    private AdapterList lvAdapter;
+    private ImageView bodyOne;
+    private ImageView bodyTwo;
+    private Integer[] firstLook= new Integer[]{0, 0, 0, 0};
+    private Integer[] secondLook= new Integer[]{0, 0, 0, 0};
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
@@ -92,7 +97,7 @@ public class ActivityGameOneOnOne extends AppCompatActivity implements View.OnCl
         TimerInit();
         timer.start();
 
-        lvAdapter = new ListAdapter(this, game.getFirstUser(), game.getSecondUser());
+        lvAdapter = new AdapterList(this, game.getFirstUser(), game.getSecondUser());
         lvWords.setAdapter(lvAdapter);
 
     }
@@ -161,8 +166,6 @@ public class ActivityGameOneOnOne extends AppCompatActivity implements View.OnCl
 
         }
         timer = new CountDownTimer(time, 1000) {
-
-
             public void onTick(long millisUntilFinished) {
                 long s = (millisUntilFinished/1000)%60;
                 long m = (millisUntilFinished/1000)/60;
@@ -175,8 +178,6 @@ public class ActivityGameOneOnOne extends AppCompatActivity implements View.OnCl
                 timer.start();
             }
         };
-
-
     }
 
     private void setFocusNameUser(int mode) {
@@ -217,23 +218,41 @@ public class ActivityGameOneOnOne extends AppCompatActivity implements View.OnCl
         secondButtonClock  = findViewById(R.id.activity_game_one_on_one__v_second_button_clock);
         firstButtonClock   = findViewById(R.id.activity_game_one_on_one__v_first_button_clock);
         lvWords            = findViewById(R.id.activity_game_one_on_one__lv_words);
-
+        bodyOne = findViewById(R.id.activity_game_one_on_one__img_v_first_mascot_backg);
+        bodyTwo = findViewById(R.id.activity_game_one_on_one__img_v_second_mascot_backg);
+        bodyOne.setColorFilter(Color.parseColor(colorOne), android.graphics.PorterDuff.Mode.SRC_IN);
+        bodyTwo.setColorFilter(Color.parseColor(colorTwo), android.graphics.PorterDuff.Mode.SRC_IN);
         tvSecondName.setText(secondUserName);
         tvFirstName.setText(firstUserName);
         ImgBtHome.setOnClickListener(this);
         ImgBtSkipTurn.setOnClickListener(this);
-
         manager = getSupportFragmentManager();
-
-
-
+        ((ImageView)findViewById(R.id.activity_game_one_on_one__img_v_first_mascot_index_0)).setImageResource(firstLook[0]);
+        ((ImageView)findViewById(R.id.activity_game_one_on_one__img_v_first_mascot_index_1)).setImageResource(firstLook[1]);
+        ((ImageView)findViewById(R.id.activity_game_one_on_one__img_v_first_mascot_index_2)).setImageResource(firstLook[2]);
+        ((ImageView)findViewById(R.id.activity_game_one_on_one__img_v_first_mascot_index_3)).setImageResource(firstLook[3]);
+        ((ImageView)findViewById(R.id.activity_game_one_on_one__img_v_second_mascot_index_0)).setImageResource(secondLook[0]);
+        ((ImageView)findViewById(R.id.activity_game_one_on_one__img_v_second_mascot_index_1)).setImageResource(secondLook[1]);
+        ((ImageView)findViewById(R.id.activity_game_one_on_one__img_v_second_mascot_index_2)).setImageResource(secondLook[2]);
+        ((ImageView)findViewById(R.id.activity_game_one_on_one__img_v_second_mascot_index_3)).setImageResource(secondLook[3]);
     }
+    @SuppressLint("ResourceType")
     private void loadSettings() {
         sPref = getSharedPreferences("settingsGameOneOnOne", MODE_PRIVATE);
         firstUserName = sPref.getString("first_name_user","Первый игрок");
         secondUserName =sPref.getString("second_name_user","Второй игрок");
         timeForTurn = sPref.getInt("time_for_turn",2);
         startWord = sPref.getString("start_word", "слово");
+        colorOne = sPref.getString("mascot_color_one", getResources().getString(R.color.mascot_one));
+        colorTwo = sPref.getString("mascot_color_two", getResources().getString(R.color.mascot_two));
+        firstLook[0] = sPref.getInt("mascot_one_index_0", 0);
+        firstLook[1] = sPref.getInt("mascot_one_index_1", 0);
+        firstLook[2] = sPref.getInt("mascot_one_index_2", 0);
+        firstLook[3] = sPref.getInt("mascot_one_index_3", 0);
+        secondLook[0] = sPref.getInt("mascot_two_index_0", 0);
+        secondLook[1] = sPref.getInt("mascot_two_index_1", 0);
+        secondLook[2] = sPref.getInt("mascot_two_index_2", 0);
+        secondLook[3] = sPref.getInt("mascot_two_index_3", 0);
     }
 
     public void createNewGame() {
@@ -242,7 +261,3 @@ public class ActivityGameOneOnOne extends AppCompatActivity implements View.OnCl
         startActivity(intent);
     }
 }
-
-
-
-

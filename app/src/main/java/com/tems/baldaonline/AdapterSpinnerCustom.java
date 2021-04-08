@@ -7,11 +7,11 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-public class CustomAdapterSpinner extends ArrayAdapter<String> {
+public class AdapterSpinnerCustom extends ArrayAdapter<String> {
 
     LayoutInflater flater;
 
-    public CustomAdapterSpinner(Activity context, int resouceId, int textviewId, String[] data){
+    public AdapterSpinnerCustom(Activity context, int resouceId, int textviewId, String[] data){
 
         super(context,resouceId,textviewId, data);
         flater = context.getLayoutInflater();

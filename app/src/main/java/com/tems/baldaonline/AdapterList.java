@@ -14,12 +14,12 @@ import java.util.ArrayList;
 import java.util.Map;
 
 
-public class ListAdapter extends BaseAdapter{
+public class AdapterList extends BaseAdapter{
     private Activity context;
     public GameUser firstUser;
     public GameUser secondUser;
 
-    public ListAdapter(Activity context, GameUser firstUser, GameUser secondUser) {
+    public AdapterList(Activity context, GameUser firstUser, GameUser secondUser) {
         this.context = context;
         this.firstUser = firstUser;
         this.secondUser = secondUser;

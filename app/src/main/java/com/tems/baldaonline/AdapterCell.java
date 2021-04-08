@@ -11,12 +11,12 @@ import android.widget.TextView;
 import java.util.List;
 
 
-public class CellAdapter extends BaseAdapter {
+public class AdapterCell extends BaseAdapter {
 
     private final Activity context;
     private final List<Character> pole;
 
-    public CellAdapter(Activity context, List<Character> pole) {
+    public AdapterCell(Activity context, List<Character> pole) {
         this.context = context;
         this.pole = pole;
     }

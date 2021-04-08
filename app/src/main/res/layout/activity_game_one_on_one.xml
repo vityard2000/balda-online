@@ -8,18 +8,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_first_cloud"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent" />
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_second_cloud"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
+<!--    <ImageView-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:src="@drawable/ic_first_cloud"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:layout_constraintLeft_toLeftOf="parent" />-->
+<!--    <ImageView-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:src="@drawable/ic_second_cloud"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:layout_constraintRight_toRightOf="parent" />-->
 
     <LinearLayout
         android:id="@+id/activity_game_one_on_one__lnr_lt_names"
@@ -92,7 +92,7 @@
             android:layout_gravity="left|center_vertical"
             android:gravity="start"
             android:text="67"
-            android:textColor="@color/elements_dark_blue"
+            android:textColor="@color/white"
             android:fontFamily="@font/gost_type"
             android:textSize="40sp"
             android:textAllCaps="false" />
@@ -102,7 +102,8 @@
             android:layout_height="30sp"
             android:layout_gravity="bottom"
             android:layout_marginHorizontal="@dimen/margin_between_elements"
-            android:background="@drawable/style_solid_corners_dark_blue"/>
+            android:background="@drawable/style_corners_25"
+            android:backgroundTint="@color/white"/>
 
         <TextView
             android:id="@+id/activity_game_one_on_one__tv_count_second_user"
@@ -111,65 +112,117 @@
             android:layout_height="40dp"
             android:layout_gravity="right|center_vertical"
             android:gravity="center"
-            android:textColor="@color/elements_dark_blue"
+            android:textColor="@color/white"
             android:fontFamily="@font/gost_type"
             android:textSize="40sp"
             android:textAllCaps="false" />
 
     </LinearLayout>
-
-    <FrameLayout
-        android:layout_marginStart="@dimen/activity_margin"
+    <TextView
+        android:id="@+id/activity_game_one_on_one__tv_first_user_name"
         android:layout_width="wrap_content"
-        android:layout_height="135dp"
+        android:layout_height="23dp"
+        android:gravity="center"
+        android:paddingHorizontal="10dp"
+        android:textColor="@color/white"
+        android:fontFamily="@font/gost_type"
+        android:textSize="20sp"
+        android:textAllCaps="false"
+        app:layout_constraintLeft_toLeftOf="@id/activity_game_one_on_one__frm_lt_mascot_first_frame"
+        app:layout_constraintBottom_toTopOf="@id/activity_game_one_on_one__frm_lt_mascot_first_frame"
+        />
+    <FrameLayout
+        android:id="@+id/activity_game_one_on_one__frm_lt_mascot_first_frame"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="40dp"
+        app:layout_constraintDimensionRatio="W,206:356"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/activity_game_one_on_one__v_top_bar">
-
-        <TextView
-            android:id="@+id/activity_game_one_on_one__tv_first_user_name"
-            android:layout_width="wrap_content"
-            android:layout_height="23dp"
-            android:gravity="center"
-            android:paddingStart="10dp"
-            android:paddingEnd="10dp"
-            android:layout_gravity="top|start"
-            android:textColor="@color/white"
-            android:fontFamily="@font/gost_type"
-            android:textSize="20sp"
-            android:textAllCaps="false" />
-
+        app:layout_constraintTop_toBottomOf="@id/activity_game_one_on_one__lnr_lt_names"
+        app:layout_constraintBottom_toTopOf="@id/activity_game_one_on_one__v_top_bar"
+        android:layout_marginLeft="@dimen/activity_margin">
         <ImageView
-            android:id="@+id/activity_game_one_on_one__iv_first_person"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|start"
-            android:src="@drawable/ic_mascot_man"/>
-
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_mascot_legs_and_hands"/>
+        <ImageView
+            android:id="@+id/activity_game_one_on_one__img_v_first_mascot_backg"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_mascot_backg"/>
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_mascot_body"/>
+        <ImageView
+            android:id="@+id/activity_game_one_on_one__img_v_first_mascot_index_0"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+        <ImageView
+            android:id="@+id/activity_game_one_on_one__img_v_first_mascot_index_1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+        <ImageView
+            android:id="@+id/activity_game_one_on_one__img_v_first_mascot_index_2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+        <ImageView
+            android:id="@+id/activity_game_one_on_one__img_v_first_mascot_index_3"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
     </FrameLayout>
-    <FrameLayout
+    <TextView
+        android:id="@+id/activity_game_one_on_one__tv_second_user_name"
         android:layout_width="wrap_content"
-        android:layout_height="135dp"
-        android:layout_marginEnd="@dimen/activity_margin"
+        android:layout_height="23dp"
+        android:gravity="center"
+        android:paddingHorizontal="10dp"
+        android:textColor="@color/white"
+        android:fontFamily="@font/gost_type"
+        android:textSize="20sp"
+        android:textAllCaps="false"
+        app:layout_constraintRight_toRightOf="@id/activity_game_one_on_one__frm_lt_mascot_second_frame"
+        app:layout_constraintBottom_toTopOf="@id/activity_game_one_on_one__frm_lt_mascot_second_frame"
+        />
+    <FrameLayout
+        android:id="@+id/activity_game_one_on_one__frm_lt_mascot_second_frame"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="40dp"
+        app:layout_constraintDimensionRatio="W,206:356"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/activity_game_one_on_one__v_top_bar">
-        <TextView
-            android:id="@+id/activity_game_one_on_one__tv_second_user_name"
-            android:layout_width="wrap_content"
-            android:layout_height="23dp"
-            android:layout_gravity="top|end"
-            android:gravity="end"
-            android:paddingStart="10dp"
-            android:paddingEnd="10dp"
-            android:textColor="@color/white"
-            android:fontFamily="@font/gost_type"
-            android:textSize="20sp"
-            android:textAllCaps="false"/>
+        app:layout_constraintTop_toBottomOf="@id/activity_game_one_on_one__lnr_lt_names"
+        app:layout_constraintBottom_toTopOf="@id/activity_game_one_on_one__v_top_bar"
+        android:layout_marginRight="@dimen/activity_margin">
         <ImageView
-            android:id="@+id/activity_game_one_on_one__iv_second_person"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end"
-            android:src="@drawable/ic_mascot_girl"/>
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_mascot_legs_and_hands"/>
+        <ImageView
+            android:id="@+id/activity_game_one_on_one__img_v_second_mascot_backg"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_mascot_backg"/>
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_mascot_body"/>
+        <ImageView
+            android:id="@+id/activity_game_one_on_one__img_v_second_mascot_index_0"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+        <ImageView
+            android:id="@+id/activity_game_one_on_one__img_v_second_mascot_index_1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+        <ImageView
+            android:id="@+id/activity_game_one_on_one__img_v_second_mascot_index_2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+        <ImageView
+            android:id="@+id/activity_game_one_on_one__img_v_second_mascot_index_3"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
     </FrameLayout>
 
     <TextView

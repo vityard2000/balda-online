@@ -31,4 +31,22 @@
         <item>20м</item>
         <item>30м</item>
     </string-array>
+    <string-array name="editor_colors">
+        <item>#DF598F</item>
+        <item>#F6C36A</item>
+        <item>#D6BC97</item>
+        <item>#53B956</item>
+        <item>#278B9A</item>
+        <item>#614E86</item>
+        <item>#FAD74B</item>
+        <item>#F9FC67</item>
+        <item>#F16570</item>
+        <item>#F5E077</item>
+        <item>#E4D1A9</item>
+        <item>#7AC371</item>
+        <item>#71C8DC</item>
+        <item>#9883BE</item>
+        <item>#4270F1</item>
+        <item>#1D54ED</item>
+    </string-array>
 </resources>

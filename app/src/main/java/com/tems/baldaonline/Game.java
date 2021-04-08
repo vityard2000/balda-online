@@ -1,6 +1,7 @@
 package com.tems.baldaonline;
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
@@ -9,7 +10,7 @@ import android.widget.GridView;
 import android.widget.TextView;
 import androidx.fragment.app.FragmentManager;
 import com.tems.baldaonline.View.ActivityGameOneOnOne;
-import com.tems.baldaonline.View.DialogInfo;
+import com.tems.baldaonline.View.ActivityMenu;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,6 +41,7 @@ public class Game {
     private GameUser firstUser;
     private GameUser secondUser;
     private boolean isSaveGame;
+    private int countTurns = 0;
 
     public Game(Activity context, GridView gridViewGameMap, String startWord, boolean isSaveGame) {
         this.context = context;
@@ -90,6 +92,7 @@ public class Game {
                     secondUser.setWord(cursor.getString(wordIndex));
                 }
                 pole.set(cursor.getInt(numCellIndex), cursor.getString(letterIndex).charAt(0));
+                countTurns++;
             }while(cursor.moveToNext());
 
             currentUser = (currentUser == FIRST_USER)? SECOND_USER: FIRST_USER;// смена хода
@@ -168,6 +171,27 @@ public class Game {
                                             onAddWordInDictionary.onAddWordInDictionary(); //говорим, что слово есть в бд
                                             currentUser = (currentUser == FIRST_USER)?SECOND_USER:FIRST_USER; // меняем пользователя
                                             numEnterLetter= -1; // обнуляем номер нажатой ячейки
+                                            countTurns++;
+
+                                            if(countTurns == rowsCount*(rowsCount - 1)){
+                                                if(firstUser.getCount() != secondUser.getCount()){
+                                                    boolean winUser = firstUser.getCount() < secondUser.getCount();
+                                                    new DialogFinish(new DialogFinish.OnCloseListener() {
+                                                        @Override
+                                                        public void onClose() {
+                                                            new DialogYesNo(null, new DialogYesNo.OnClickListener() {
+                                                                @Override
+                                                                public void onClick() {
+                                                                    context.startActivity(new Intent(context, ActivityMenu.class));
+
+                                                                }
+                                                            }, "Выйти в меню?").show(manager, "chase_dialog");
+                                                        }
+                                                    }, winUser).show(manager, "finish_dialog");
+                                                }else {
+                                                    Log.d(myTag, "ничья");
+                                                }
+                                            }
                                         } else{
                                             new DialogYesNo(null , new DialogYesNo.OnClickListener() {
                                                 @Override
@@ -196,7 +220,7 @@ public class Game {
             }
             return true;
         });
-        gridViewGameMap.setAdapter(new CellAdapter(context, pole));
+        gridViewGameMap.setAdapter(new AdapterCell(context, pole));
     }
 
     private boolean isWordInDirectory(String word){
@@ -204,10 +228,7 @@ public class Game {
         String selection = "word = ?";
         String[] selectionArg = {word.toLowerCase()};
         Cursor cursor = databaseWords.query(DBHelper.TABLE_DICTIONARY, null, selection, selectionArg, null, null , null);
-        Log.d(myTag, " все ок");
-
         Cursor cursorGameData = databaseGameData.query(DBHelperGameData.TABLE_WORDS, null, selection, selectionArg, null, null , null);
-        Log.d(myTag, " все ок ок");
         if(cursor.moveToFirst() || cursorGameData.moveToFirst()){
             flag = true;
         }
@@ -348,6 +369,3 @@ public class Game {
         void onAddWordInDictionary();
     }
 }
-
-
-

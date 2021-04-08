@@ -1,4 +1,4 @@
-package com.tems.baldaonline.View;
+package com.tems.baldaonline;
 
 import android.app.Dialog;
 import android.graphics.Color;
@@ -42,9 +42,5 @@ public class DialogInfo extends AppCompatDialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setView(view);
         return builder.create();
-    }
-
-    public interface OnClickListener {
-        void onClick();
     }
 }
