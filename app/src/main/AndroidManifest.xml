@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     package="com.tems.baldaonline">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+
     <application
+        android:name=".App"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
@@ -11,17 +15,21 @@
         android:screenOrientation="portrait"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
-        <activity android:name=".View.ActivityEditor"></activity>
-        <activity android:name=".View.ActivitySettingsGameOneOnOne"></activity>
-        <activity android:name=".View.ActivityLoad">
+        <activity
+            android:name=".views.ActivityOnlineGames"
+            android:label="@string/title_activity_online_games"/>
+<!--            android:theme="@style/NoActionBar" -->
+        <activity android:name=".views.ActivityEditor" />
+        <activity android:name=".views.ActivitySettingsGameOneOnOne" />
+        <activity android:name=".views.ActivityLoad">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".View.ActivityMenu" />
-        <activity android:name=".View.ActivityGameOneOnOne" />
+        <activity android:name=".views.ActivityMenu" />
+        <activity android:name=".views.ActivityGameOneOnOne" />
     </application>
 
 </manifest>
