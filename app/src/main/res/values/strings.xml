@@ -1,18 +1,63 @@
 <resources>
     <string name="app_name">Balda Online</string>
     <string name="string_name_game">Балда</string>
-    <string name="activity_main__tv_1">текст</string>
-    <string name="activity_main__bt_1">Save</string>
-    <string name="activity_main__bt_2">Load</string>
-    <string name="activity_main__bt_to_activity_two">Перейти в другое активити</string>
     <string name="activity_two__bt_to_activity_main">Назад</string>
-    <string name="activity_two__bt1">Показать на карте</string>
     <string name="activity_menu__bt_online_game">Найти пару</string>
-    <string name="activity_menu__bt_joint_game">Играть двоем</string>
+    <string name="activity_menu__bt_joint_game">Играть вдвоем</string>
     <string name="activity_menu__bt_bot_game">Играть с ботом</string>
     <string name="activity_menu__bt_friends">Друзья</string>
     <string name="activity_menu__bt_shop">Магазин</string>
     <string name="activity_registration__sign_in">Вход</string>
     <string name="activity_registration__bt_registration">Регистация</string>
     <string name="activity_registration__bt_google">Google</string>
+    <string name="activity_settings_game_one_on_one__start_word">Начальное слово</string>
+    <string name="activity_settings_game_one_on_one__size_pole">Размер поля</string>
+    <string name="activity_settings_game_one_on_one__time_for_turn">Время на ход</string>
+    <string name="activity_settings_game_one_on_one__random_word">Случайное слово</string>
+    <string name="activity_settings_game_one_on_one__begin">Начать</string>
+    <string-array name="spinner_size_pole">
+        <item>3x3</item>
+        <item>4x4</item>
+        <item>5x5</item>
+        <item>6x6</item>
+        <item>7x7</item>
+    </string-array>
+    <string-array name="spinner_time_ror_turn">
+        <item>30с</item>
+        <item>1м</item>
+        <item>2м</item>
+        <item>5м</item>
+        <item>10м</item>
+        <item>20м</item>
+        <item>30м</item>
+    </string-array>
+    <string-array name="editor_colors">
+        <item>#DF598F</item>
+        <item>#F6C36A</item>
+        <item>#D6BC97</item>
+        <item>#53B956</item>
+        <item>#278B9A</item>
+        <item>#614E86</item>
+        <item>#FAD74B</item>
+        <item>#F9FC67</item>
+        <item>#F16570</item>
+        <item>#F5E077</item>
+        <item>#E4D1A9</item>
+        <item>#7AC371</item>
+        <item>#71C8DC</item>
+        <item>#9883BE</item>
+        <item>#4270F1</item>
+        <item>#1D54ED</item>
+    </string-array>
+    <string name="title_activity_online_games">ActivityOnlineGames</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
 </resources>

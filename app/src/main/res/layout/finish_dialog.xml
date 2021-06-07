@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/style_corners_25"
+    android:backgroundTint="@color/elements_blue"
+    android:padding="25dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <TextView
+        android:id="@+id/finish_dialog__tv_massage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Игра окончена!"
+        android:textColor="@color/white"
+        android:fontFamily="@font/gost_type"
+        android:textSize="@dimen/size_text"
+        android:textAllCaps="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
+    <TextView
+        android:id="@+id/finish_dialog__tv_first_user_name"
+        android:layout_width="wrap_content"
+        android:layout_height="23dp"
+        android:text="первый игрок"
+        android:gravity="center"
+        android:background="@drawable/style_corners_25"
+        android:backgroundTint="@color/focus_name"
+        android:paddingHorizontal="10dp"
+        android:textColor="@color/white"
+        android:fontFamily="@font/gost_type"
+        android:textSize="20sp"
+        android:textAllCaps="false"
+        app:layout_constraintLeft_toLeftOf="@id/finish_dialog__img_v_first_mascot"
+        app:layout_constraintBottom_toTopOf="@id/finish_dialog__img_v_first_mascot"
+        />
+    <FrameLayout
+        android:id="@+id/finish_dialog__img_v_first_mascot"
+        android:layout_width="70dp"
+        android:layout_height="120.97087dp"
+        app:layout_constraintBottom_toBottomOf="@id/finish_dialog__v_frame"
+        app:layout_constraintRight_toRightOf="@id/finish_dialog__v_frame"
+        >
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_mascot_legs_and_hands"/>
+        <ImageView
+            android:id="@+id/finish_dialog__img_v_first_mascot_backg"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_mascot_backg"/>
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_mascot_body"/>
+        <ImageView
+            android:id="@+id/finish_dialog__img_v_first_mascot_index_0"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+        <ImageView
+            android:id="@+id/finish_dialog__img_v_first_mascot_index_1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+        <ImageView
+            android:id="@+id/finish_dialog__img_v_first_mascot_index_2"
+            android:src="@drawable/ic_accessory_medal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+        <ImageView
+            android:id="@+id/finish_dialog__img_v_first_mascot_index_3"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </FrameLayout>
+    <TextView
+        android:id="@+id/finish_dialog__tv_second_user_name"
+        android:layout_width="wrap_content"
+        android:layout_height="23dp"
+        android:text="второй игрок"
+        android:background="@drawable/style_corners_25"
+        android:backgroundTint="@color/focus_name"
+        android:gravity="center"
+        android:paddingHorizontal="10dp"
+        android:textColor="@color/white"
+        android:fontFamily="@font/gost_type"
+        android:textSize="20sp"
+        android:textAllCaps="false"
+        app:layout_constraintRight_toRightOf="@id/finish_dialog__img_v_second_mascot"
+        app:layout_constraintLeft_toLeftOf="@id/finish_dialog__img_v_second_mascot"
+        app:layout_constraintBottom_toTopOf="@id/finish_dialog__img_v_second_mascot"
+        />
+    <FrameLayout
+        android:id="@+id/finish_dialog__img_v_second_mascot"
+        android:layout_width="70dp"
+        android:layout_height="120.97087dp"
+        app:layout_constraintTop_toTopOf="@id/finish_dialog__v_frame"
+        app:layout_constraintLeft_toLeftOf="@id/finish_dialog__v_frame"
+        android:layout_marginLeft="10dp"
+        >
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_mascot_hands_cap"/>
+        <ImageView
+            android:id="@+id/finish_dialog__img_v_second_mascot_backg"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_mascot_backg"/>
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_mascot_body"/>
+        <ImageView
+            android:id="@+id/finish_dialog__img_v_second_mascot_index_0"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+        <ImageView
+            android:id="@+id/finish_dialog__img_v_second_mascot_index_1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+        <ImageView
+            android:id="@+id/finish_dialog__img_v_second_mascot_index_2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+        <ImageView
+            android:id="@+id/finish_dialog__img_v_second_mascot_index_3"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </FrameLayout>
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_accessory_cap"
+
+        app:layout_constraintBottom_toBottomOf="@id/finish_dialog__v_frame"
+        app:layout_constraintLeft_toLeftOf="@id/finish_dialog__v_frame"
+        />
+    <View
+        android:id="@+id/finish_dialog__v_frame"
+        android:layout_width="145dp"
+        android:layout_height="193dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/finish_dialog__tv_massage"/>
+    <ImageButton
+        android:id="@+id/dialog_finish__bt_close"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@drawable/ic_close"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

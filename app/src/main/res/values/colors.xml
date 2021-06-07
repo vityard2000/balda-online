@@ -7,7 +7,19 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="bt">#186A6A</color>
-    <color name="bt_press">#219B9B</color>
-    <color name="bt_google_press">#EAEAEA</color>
+    <color name="black_70">#B3000000</color>
+
+    <color name="elements_dark_blue">#1B6A80</color>
+    <color name="elements_blue">#33A8BF</color>
+    <color name="elements_white_blue">#95E7FB</color>
+    <color name="elements_dark_green">#186A6A</color>
+    <color name="elements_white_green">#699A9A</color>
+    <color name="elements_purple">#9535CC</color>
+    <color name="cell_press">#EAEAEA</color>
+    <color name="pink">#DF598F</color>
+    <color name="mascot_1">#A7FFEB</color>
+    <color name="mascot_2">#FF80AB</color>
+    <color name="mascot_online">#82B1FF</color>
+    <color name="focus_name">#64000000</color>
+    <color name="no_focus_name">#33000000</color>
 </resources>
