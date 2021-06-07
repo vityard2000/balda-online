@@ -27,8 +27,8 @@ import com.tems.baldaonline.R;
 public class ActivityGameOneOnOne extends AppCompatActivity implements View.OnClickListener{
 
     private static final String myTag    = "debugTag";
-    private static final int FIRST_USER  = 0;
-    private static final int SECOND_USER = 1;
+    private static final int FIRST_USER  = 1;
+    private static final int SECOND_USER = 2;
     private static final int CHANGE_USER = -1;
     private SharedPreferences sPref;
     private int timeForTurn;
@@ -170,13 +170,13 @@ public class ActivityGameOneOnOne extends AppCompatActivity implements View.OnCl
         switch (mode) {
             case 0:
                 tvFirstName.setBackgroundResource(R.drawable.style_focus_name);
-                tvSecondName.setBackgroundResource(R.drawable.style_solid_corners_dark);
+                tvSecondName.setBackgroundResource(R.drawable.style_no_fosus_name);
                 firstButtonClock.setVisibility(View.INVISIBLE);
                 secondButtonClock.setVisibility(View.VISIBLE);
                 break;
             case 1:
                 tvSecondName.setBackgroundResource(R.drawable.style_focus_name);
-                tvFirstName.setBackgroundResource(R.drawable.style_solid_corners_dark);
+                tvFirstName.setBackgroundResource(R.drawable.style_no_fosus_name);
                 firstButtonClock.setVisibility(View.VISIBLE);
                 secondButtonClock.setVisibility(View.INVISIBLE);
                 break;
@@ -223,14 +223,14 @@ public class ActivityGameOneOnOne extends AppCompatActivity implements View.OnCl
         ((ImageView)findViewById(R.id.activity_game_one_on_one__img_v_second_mascot_index_3)).setImageResource(secondLook[3]);
     }
     @SuppressLint("ResourceType")
-    private void loadSettings() {
+    private void loadSettings() {//ok
         sPref = getSharedPreferences("settingsGameOneOnOne", MODE_PRIVATE);
         firstUserName = sPref.getString("first_name_user","Первый игрок");
         secondUserName =sPref.getString("second_name_user","Второй игрок");
         timeForTurn = sPref.getInt("time_for_turn",2);
         startWord = sPref.getString("start_word", "слово");
-        colorOne = sPref.getString("mascot_color_one", getResources().getString(R.color.mascot_one));
-        colorTwo = sPref.getString("mascot_color_two", getResources().getString(R.color.mascot_two));
+        colorOne = sPref.getString("mascot_color_one", getResources().getString(R.color.mascot_1));
+        colorTwo = sPref.getString("mascot_color_two", getResources().getString(R.color.mascot_2));
         firstLook[0] = sPref.getInt("mascot_one_index_0", 0);
         firstLook[1] = sPref.getInt("mascot_one_index_1", 0);
         firstLook[2] = sPref.getInt("mascot_one_index_2", 0);

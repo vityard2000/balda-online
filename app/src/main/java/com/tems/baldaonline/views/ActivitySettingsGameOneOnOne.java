@@ -1,4 +1,5 @@
 package com.tems.baldaonline.views;
+import androidx.activity.result.ActivityResultLauncher;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProviders;
@@ -6,7 +7,6 @@ import androidx.lifecycle.ViewModelProviders;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.res.ColorStateList;
-import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
@@ -19,6 +19,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 
+import com.tems.baldaonline.App;
 import com.tems.baldaonline.adapters.AdapterSpinnerCustom;
 import com.tems.baldaonline.R;
 import com.tems.baldaonline.viewModels.SettingsGameOneOnOneViewModel;
@@ -46,7 +47,8 @@ public class ActivitySettingsGameOneOnOne extends AppCompatActivity implements V
         setContentView(R.layout.activity_setings_game_one_on_one);
 
         //init
-        model                = ViewModelProviders.of(this).get(SettingsGameOneOnOneViewModel.class);
+        model = ViewModelProviders.of(this).get(SettingsGameOneOnOneViewModel.class);
+
         edtTxtFirstNameUser  = findViewById(R.id.activity_settings_game_one_on_one__edt_txt_first_name_user);
         edtTxtSecondNameUser = findViewById(R.id.activity_settings_game_one_on_one__edt_txt_second_name_user);
         edtTxtStartWord      = findViewById(R.id.activity_settings_game_one_on_one__edt_txt_start_word);
@@ -61,7 +63,7 @@ public class ActivitySettingsGameOneOnOne extends AppCompatActivity implements V
 
         //setOnClickListeners
         btBegin.setOnClickListener(this);
-        btRandom.setOnClickListener(this);
+        btRandom.setOnClickListener(v -> model.refreshRandomWordByLength(spinnerSizePole.getSelectedItemPosition() + 3));
         btMascotOne.setOnClickListener(this);
         btMascotTwo.setOnClickListener(this);
 
@@ -72,6 +74,7 @@ public class ActivitySettingsGameOneOnOne extends AppCompatActivity implements V
         spinnerSizePole.setAdapter(adapterSizePole);
 
         //subscriptions
+        App.getInstance().getSettingsRepository().getObservableData().observe(this, (o) -> model.dataChange());
         model.getStartWord().observe(this, (value) -> {
             spinnerSizePole.setSelection(value.length()-3);
             if(!value.equals(edtTxtStartWord.getText().toString()) ) {
@@ -81,8 +84,9 @@ public class ActivitySettingsGameOneOnOne extends AppCompatActivity implements V
         model.getFirstUserName().observe(this, (value) -> edtTxtFirstNameUser.setText(value));
         model.getSecondUserName().observe(this, (value) -> edtTxtSecondNameUser.setText(value));
         model.getTimeForTurn().observe(this, (value) -> spinnerTimeForTurn.setSelection(value));
-        model.getMascotColorOne().observe(this, (value) -> backgroundBtOne.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(value))));
-        model.getMascotColorTwo().observe(this, (value) -> backgroundBtTwo.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(value))));
+        model.getMascotColorOne().observe(this, integer -> backgroundBtOne.setBackgroundTintList(ColorStateList.valueOf(integer)));
+        model.getMascotColorTwo().observe(this, integer -> backgroundBtTwo.setBackgroundTintList(ColorStateList.valueOf(integer)));
+
         //callBacks
         spinnerTimeForTurn.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -122,6 +126,8 @@ public class ActivitySettingsGameOneOnOne extends AppCompatActivity implements V
                 model.refreshWord(s.toString());
             }
         });
+        edtTxtFirstNameUser.setOnFocusChangeListener((v, hasFocus) -> model.refreshFirstUserName(((EditText)v).getText().toString()));
+        edtTxtSecondNameUser.setOnFocusChangeListener((v, hasFocus) -> model.refreshSecondUserName(((EditText)v).getText().toString()));
 
 
     }
@@ -131,31 +137,18 @@ public class ActivitySettingsGameOneOnOne extends AppCompatActivity implements V
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.activity_settings_game_one_on_one__bt_mascot_one:
-                Intent intentOne = new Intent(this, ActivityEditor.class)
-                    .putExtra("num_mascot", false);
+                Intent intentOne = new Intent(this, ActivityEditor.class).putExtra("num_mascot", false);
                 startActivity(intentOne);
                 break;
             case R.id.activity_settings_game_one_on_one__bt_mascot_two:
-                Intent intentTwo = new Intent(this, ActivityEditor.class)
-                    .putExtra("num_mascot", true);
+                Intent intentTwo = new Intent(this, ActivityEditor.class).putExtra("num_mascot", true);
                 startActivity(intentTwo);
                 break;
             case R.id.activity_settings_game_one_on_one__bt_begin:
-                if (isValidate()){
-                    model.refreshNames(edtTxtFirstNameUser.getText().toString(), edtTxtSecondNameUser.getText().toString());
-                    model.saveSettings();
-                    startActivity(new Intent(this, ActivityGameOneOnOne.class));
-                }
-                break;
-            case R.id.activity_settings_game_one_on_one__bt_random_word:
-
-                model.refreshRandomWordByLength(spinnerSizePole.getSelectedItemPosition() + 3);
+                model.saveSettings();
+                startActivity(new Intent(ActivitySettingsGameOneOnOne.this, ActivityGameOneOnOne.class));
                 break;
         }
-    }
-
-    private boolean isValidate() {
-        return true;
     }
 
 }

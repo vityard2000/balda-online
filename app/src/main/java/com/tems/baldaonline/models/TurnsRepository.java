@@ -19,26 +19,27 @@ public class TurnsRepository implements RepositoryTurns {
 
     @Override
     public void getAll(OnReadyTurnData onReadyTurnData) {
+        new Thread(() -> {
+            List<Turn> turns = new ArrayList<>();
+            Cursor cursor = databaseGameData.query(DBHelperGameData.TABLE_TURNS, null, null, null, null, null , null);
 
-        List<Turn> turns = new ArrayList<>();
-        Cursor cursor = databaseGameData.query(DBHelperGameData.TABLE_TURNS, null, null, null, null, null , null);
-
-        int wordIndex = cursor.getColumnIndex(DBHelperGameData.KEY_WORD);
-        int letterIndex = cursor.getColumnIndex(DBHelperGameData.KEY_LETTER);
-        int numCellIndex = cursor.getColumnIndex(DBHelperGameData.KEY_NUM_CELL);
-        int userIndex = cursor.getColumnIndex(DBHelperGameData.KEY_USER);
-        if(cursor.moveToFirst()){
-            do {
-                Turn turn= new Turn();
-                turn.setWord(cursor.getString(wordIndex));
-                turn.setLetter(cursor.getString(letterIndex).charAt(0));
-                turn.setNumCel(cursor.getInt(numCellIndex));
-                turn.setUser(cursor.getInt(userIndex));
-                turns.add(turn);
-            }while(cursor.moveToNext());
-        }
-        cursor.close();
-        onReadyTurnData.onReadyData(turns);
+            int wordIndex = cursor.getColumnIndex(DBHelperGameData.KEY_WORD);
+            int letterIndex = cursor.getColumnIndex(DBHelperGameData.KEY_LETTER);
+            int numCellIndex = cursor.getColumnIndex(DBHelperGameData.KEY_NUM_CELL);
+            int userIndex = cursor.getColumnIndex(DBHelperGameData.KEY_USER);
+            if(cursor.moveToFirst()){
+                do {
+                    Turn turn= new Turn();
+                    turn.setWord(cursor.getString(wordIndex));
+                    turn.setLetter(cursor.getString(letterIndex).charAt(0));
+                    turn.setNumCel(cursor.getInt(numCellIndex));
+                    turn.setUser(cursor.getInt(userIndex));
+                    turns.add(turn);
+                }while(cursor.moveToNext());
+            }
+            cursor.close();
+            onReadyTurnData.onReadyData(turns);
+        }).start();
     }
 
     @Override
@@ -58,4 +59,8 @@ public class TurnsRepository implements RepositoryTurns {
         cursor.close();
         return isEmpty;
     }
+    public interface OnReadyTurnData {
+        void onReadyData(List<Turn> data);
+    }
 }
+

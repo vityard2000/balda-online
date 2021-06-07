@@ -56,7 +56,7 @@ public class ActivityMenu extends AppCompatActivity implements View.OnClickListe
                 }
                 break;
             case R.id.activity_menu__bt_online_game:
-                Intent intent = new Intent(this, ActivityOnlineGames.class);
+                Intent intent = new Intent(this, ActivityOnlineGames.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
                 break;
         }

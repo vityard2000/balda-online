@@ -1,6 +1,8 @@
 package com.tems.baldaonline.adapters;
 
 import android.app.Activity;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +18,6 @@ public class AdapterSpinnerCustom extends ArrayAdapter<String> {
     LayoutInflater flater;
 
     public AdapterSpinnerCustom(Activity context, int resouceId, int textviewId, String[] data){
-
         super(context,resouceId,textviewId, data);
         flater = context.getLayoutInflater();
     }
@@ -29,8 +30,9 @@ public class AdapterSpinnerCustom extends ArrayAdapter<String> {
         TextView txtTitle = convertView.findViewById(R.id.spinner_item_tv);
         txtTitle.setText(rowItem);
         if(position%2==1) {
-            txtTitle.setBackgroundResource(R.drawable.backgraund_white);
+            txtTitle.setBackground(new ColorDrawable(Color.argb(77,255,255,255)));
         }
+
         return convertView;
     }
 }

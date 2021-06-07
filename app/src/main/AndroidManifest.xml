@@ -8,28 +8,40 @@
 
     <application
         android:name=".App"
-        android:allowBackup="true"
+        android:allowBackup=""
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:screenOrientation="portrait"
         android:supportsRtl="true"
-        android:theme="@style/Theme.AppCompat.NoActionBar">
+        android:theme="@style/Theme.BaldaOnline">
+        <activity android:name=".views.ActivityCreateOnlineGame" />
+        <activity android:name=".views.ActivitySettingsBotGame" />
         <activity
             android:name=".views.ActivityOnlineGames"
-            android:label="@string/title_activity_online_games"/>
-<!--            android:theme="@style/NoActionBar" -->
-        <activity android:name=".views.ActivityEditor" />
-        <activity android:name=".views.ActivitySettingsGameOneOnOne" />
-        <activity android:name=".views.ActivityLoad">
+            android:label="@string/title_activity_online_games"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".views.ActivityEditor"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".views.ActivitySettingsGameOneOnOne"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".views.ActivityLoad"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".views.ActivityMenu" />
-        <activity android:name=".views.ActivityGameOneOnOne" />
+        <activity
+            android:name=".views.ActivityMenu"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".views.ActivityGameOneOnOne"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

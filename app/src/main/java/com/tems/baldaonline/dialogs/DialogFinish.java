@@ -8,7 +8,6 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -58,8 +57,8 @@ public class DialogFinish extends AppCompatDialogFragment {
         sPref = getContext().getSharedPreferences("settingsGameOneOnOne", 0);
         firstUserName = sPref.getString("first_name_user","Первый игрок");
         secondUserName = sPref.getString("second_name_user","Второй игрок");
-        colorOne = sPref.getString("mascot_color_one", getResources().getString(R.color.mascot_one));
-        colorTwo = sPref.getString("mascot_color_two", getResources().getString(R.color.mascot_two));
+        colorOne = sPref.getString("mascot_color_one", getResources().getString(R.color.mascot_1));
+        colorTwo = sPref.getString("mascot_color_two", getResources().getString(R.color.mascot_2));
         firstLook[0] = sPref.getInt("mascot_one_index_0", 0);
         firstLook[1] = sPref.getInt("mascot_one_index_1", 0);
         firstLook[2] = sPref.getInt("mascot_one_index_2", 0);

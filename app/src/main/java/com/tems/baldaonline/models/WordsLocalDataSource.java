@@ -2,17 +2,12 @@ package com.tems.baldaonline.models;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-
-import com.tems.baldaonline.App;
 import com.tems.baldaonline.domain.Word;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class WordsLocalDataSource implements RepositoryWords {
 
-    private SQLiteDatabase databaseWords;
-    private SQLiteDatabase databaseGameData;
+    private final SQLiteDatabase databaseWords;
+    private final SQLiteDatabase databaseGameData;
 
     public WordsLocalDataSource(SQLiteDatabase dataBaseWords, SQLiteDatabase dataBaseGameData) {
         this.databaseWords  = dataBaseWords;
@@ -21,7 +16,7 @@ public class WordsLocalDataSource implements RepositoryWords {
 
 
     @Override
-    public void getWord(String wordStr, OnReadyWordData onReadyDataCallback) {
+    public void getWord(String wordStr, WordsRepository.OnReadyWordData onReadyDataCallback) {
         Word word = new Word();
         String selection = "word = ?";
         String[] selectionArg = {wordStr.toLowerCase()};
@@ -41,7 +36,7 @@ public class WordsLocalDataSource implements RepositoryWords {
     }
 
     @Override
-    public void getRandomWordsByLength(int length, OnReadyWordData onReadyDataCallback) {
+    public void getRandomWordsByLength(int length, WordsRepository.OnReadyWordData onReadyDataCallback) {
         Word word = new Word();
         String selection = "LENGTH(word) = " + length;
         Cursor cursorWord = databaseWords.query(DBHelper.TABLE_DICTIONARY, null, selection, null, null, null , null);

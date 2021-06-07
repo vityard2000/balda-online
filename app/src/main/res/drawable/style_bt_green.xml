@@ -2,10 +2,10 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:state_pressed="false"
-        android:drawable="@drawable/style_corners_25"
+        android:drawable="@drawable/style_no_pressed_green"
         />
     <item
         android:state_pressed="true"
-        android:drawable="@drawable/style_solid_corners_blue"
+        android:drawable="@drawable/style_pressed_blue"
         />
 </selector>

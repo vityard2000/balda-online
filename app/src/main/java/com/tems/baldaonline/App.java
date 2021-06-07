@@ -23,11 +23,13 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
         instance = this;
-
-        DBHelper dbHelperWords = new DBHelper(this);
-        DBHelperGameData dbHelperGameData = new DBHelperGameData(this);
-        dataBaseWords = dbHelperWords.getReadableDatabase();
-        dataBaseGameData = dbHelperGameData.getWritableDatabase();
+        (new Thread(()-> {
+                DBHelper dbHelperWords = new DBHelper(this);
+                DBHelperGameData dbHelperGameData = new DBHelperGameData(this);
+                dataBaseWords = dbHelperWords.getReadableDatabase();
+                dataBaseGameData = dbHelperGameData.getWritableDatabase();
+           }
+       )).start();
     }
 
     public static App getInstance() {

@@ -3,6 +3,7 @@ package com.tems.baldaonline.models;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.tems.baldaonline.App;
+import com.tems.baldaonline.domain.Word;
 
 public class WordsRepository implements RepositoryWords{
 
@@ -34,4 +35,10 @@ public class WordsRepository implements RepositoryWords{
     public void insert(String word) {
         localDataSource.insert(word);
     }
+
+    public interface OnReadyWordData {
+        void onReadyData(Word data);
+    }
 }
+
+

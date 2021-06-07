@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="radius_bt">25dp</dimen>
+    <dimen name="radius_bt_keyboard">15dp</dimen>
     <dimen name="margin_between_elements">3dp</dimen>
     <dimen name="sizeMarginGameMap">2dp</dimen>
     <dimen name="sizeTextOnMapeMap">20dp</dimen>
@@ -10,6 +11,11 @@
     <dimen name="keyboard_margin">3dp</dimen>
     <dimen name="keyboard_height">60dp</dimen>
     <dimen name="activity_margin">10dp</dimen>
+
+
+
+
+
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>

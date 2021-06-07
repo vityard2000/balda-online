@@ -1,5 +1,6 @@
 package com.tems.baldaonline.views;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
@@ -7,16 +8,17 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
 
+import com.tems.baldaonline.App;
 import com.tems.baldaonline.domain.Accessory;
 import com.tems.baldaonline.adapters.AdapterAccessories;
 import com.tems.baldaonline.adapters.AdapterColors;
 import com.tems.baldaonline.R;
+import com.tems.baldaonline.domain.Mascot;
+import com.tems.baldaonline.domain.Outfit;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,9 +34,9 @@ public class ActivityEditor extends AppCompatActivity {
     private List<Accessory> accessories;
     private String color;
     private SharedPreferences sPref;
-    private Intent intent;
     private ImageView imageView;
     private Integer[] look;
+
     @SuppressLint("ResourceType")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +45,7 @@ public class ActivityEditor extends AppCompatActivity {
         look = new Integer[]{0, 0, 0, 0};
         accessories = new ArrayList<>();
         num_mascot = getIntent().getBooleanExtra("num_mascot", false);
-        intent = new Intent(this, ActivitySettingsGameOneOnOne.class);
+
         mascot        = findViewById(R.id.activity_editor__img_v_mascot_backg);
         button        = findViewById(R.id.activity_editor__bt);
         gVAccessories = findViewById(R.id.activity_editor__gv_accessories);
@@ -52,13 +54,13 @@ public class ActivityEditor extends AppCompatActivity {
 
 
         if(num_mascot) {
-            color = sPref.getString("mascot_color_two", getResources().getString(R.color.mascot_two));
+            color = sPref.getString("mascot_color_2", getResources().getString(R.color.mascot_2));
             look[0] = sPref.getInt("mascot_two_index_0", 0);
             look[1] = sPref.getInt("mascot_two_index_1", 0);
             look[2] = sPref.getInt("mascot_two_index_2", 0);
             look[3] = sPref.getInt("mascot_two_index_3", 0);
         }else {
-            color = sPref.getString("mascot_color_one", getResources().getString(R.color.mascot_one));
+            color = sPref.getString("mascot_color_1", getResources().getString(R.color.mascot_1));
             look[0] = sPref.getInt("mascot_one_index_0", 0);
             look[1] = sPref.getInt("mascot_one_index_1", 0);
             look[2] = sPref.getInt("mascot_one_index_2", 0);
@@ -70,24 +72,17 @@ public class ActivityEditor extends AppCompatActivity {
         ((ImageView)findViewById(R.id.activity_editor__img_v_z_index_2)).setImageResource(look[2]);
         ((ImageView)findViewById(R.id.activity_editor__img_v_z_index_3)).setImageResource(look[3]);
         button.setOnClickListener(v -> {
-            SharedPreferences.Editor ed = sPref.edit();
-            if(num_mascot) {
-                ed.putString("mascot_color_two", color);
-                ed.putInt("mascot_two_index_0", look[0]);
-                ed.putInt("mascot_two_index_1", look[1]);
-                ed.putInt("mascot_two_index_2", look[2]);
-                ed.putInt("mascot_two_index_3", look[3]);
-            }
-            else{
-                ed.putString("mascot_color_one", color);
-                ed.putInt("mascot_one_index_0", look[0]);
-                ed.putInt("mascot_one_index_1", look[1]);
-                ed.putInt("mascot_one_index_2", look[2]);
-                ed.putInt("mascot_one_index_3", look[3]);
-            }
-            ed.apply();
 
-            startActivity(intent);
+            Outfit outfit = new Outfit();
+            outfit.setzIndex0(look[0]);
+            outfit.setzIndex1(look[1]);
+            outfit.setzIndex2(look[2]);
+            outfit.setzIndex3(look[3]);
+            Mascot mascot = new Mascot(num_mascot? 2:1, Color.parseColor(color), outfit);
+            App.getInstance().getSettingsRepository().saveMascot(mascot);
+
+            onBackPressed();
+            finish();
         });
         accessories.add(new Accessory(R.drawable.ic_accessory_skirt,R.drawable.ic_accessory_skirt_preview, 1));
         accessories.add(new Accessory(R.drawable.ic_accessory_corona,R.drawable.ic_accessory_corona_preview, 3));

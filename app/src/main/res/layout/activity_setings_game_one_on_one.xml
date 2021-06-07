@@ -2,7 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background_gradient_setings"
+    style="@style/background_gradient_green"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <LinearLayout
         android:layout_width="wrap_content"
@@ -22,10 +22,7 @@
                 android:layout_width="247dp"
                 android:layout_height="@dimen/height_elements"
                 android:background="@drawable/style_stroke_corners_green"
-                android:fontFamily="@font/gost_type"
-                android:textAllCaps="false"
                 android:textAlignment="center"
-                android:textSize="@dimen/size_text"
                 />
             <Button
                 android:id="@+id/activity_settings_game_one_on_one__bt_mascot_one"
@@ -50,10 +47,7 @@
                 android:layout_width="247dp"
                 android:layout_height="@dimen/height_elements"
                 android:background="@drawable/style_stroke_corners_green"
-                android:fontFamily="@font/gost_type"
-                android:textAllCaps="false"
                 android:textAlignment="center"
-                android:textSize="@dimen/size_text"
                 />
             <Button
                 android:id="@+id/activity_settings_game_one_on_one__bt_mascot_two"
@@ -84,11 +78,7 @@
                 android:layout_height="@dimen/height_elements"
                 android:paddingStart="33dp"
                 android:text="@string/activity_settings_game_one_on_one__size_pole"
-                android:fontFamily="@font/gost_type"
-                android:textColor="@color/white"
-                android:textAllCaps="false"
                 android:gravity="center_vertical"
-                android:textSize="@dimen/size_text"
                 >
             </TextView>
             <Spinner
@@ -96,7 +86,7 @@
                 android:layout_width="75dp"
                 android:layout_height="@dimen/height_elements"
                 android:background="@drawable/style_stroke_corners_green"
-                android:popupBackground="@drawable/style_solid_stroke_corners_geen"
+                android:popupBackground="@drawable/style_background_spinner"
 
                 />
         </LinearLayout>
@@ -113,11 +103,7 @@
                 android:layout_height="@dimen/height_elements"
                 android:text="@string/activity_settings_game_one_on_one__time_for_turn"
                 android:paddingStart="33dp"
-                android:fontFamily="@font/gost_type"
-                android:textColor="@color/white"
-                android:textAllCaps="false"
                 android:gravity="center_vertical"
-                android:textSize="@dimen/size_text"
                 >
             </TextView>
             <Spinner
@@ -125,7 +111,7 @@
                 android:layout_width="75dp"
                 android:layout_height="@dimen/height_elements"
                 android:background="@drawable/style_stroke_corners_green"
-                android:popupBackground="@drawable/style_solid_stroke_corners_geen"
+                android:popupBackground="@drawable/style_background_spinner"
                 />
         </LinearLayout>
         <FrameLayout
@@ -133,55 +119,34 @@
             android:layout_width="@dimen/width_button"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:background="@drawable/ic_et_background">
+            android:background="@drawable/ic_et_background"
+            android:layout_marginBottom="@dimen/margin_between_elements">
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/height_elements"
                 android:text="@string/activity_settings_game_one_on_one__start_word"
-                android:fontFamily="@font/gost_type"
-                android:textColor="@color/white"
-                android:textAllCaps="false"
-                android:gravity="center"
-                android:textSize="@dimen/size_text"/>
+                android:gravity="center"/>
             <EditText
                 android:id="@+id/activity_settings_game_one_on_one__edt_txt_start_word"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/height_elements"
-                android:fontFamily="@font/gost_type"
-                android:textSize="@dimen/size_text"
-                android:textColor="@color/white"
                 android:gravity="center"
                 android:background="@drawable/style_stroke_corners_green"
-                android:height="@dimen/height_elements"
                 android:layout_gravity="bottom"/>
         </FrameLayout>
         <Button
             android:id="@+id/activity_settings_game_one_on_one__bt_random_word"
-            android:layout_width="@dimen/width_button"
-            android:layout_height="@dimen/height_elements"
+            style="@style/button_settings"
             android:text="@string/activity_settings_game_one_on_one__random_word"
-            android:fontFamily="@font/gost_type"
-            android:textAllCaps="false"
-            android:gravity="center"
-            android:textSize="@dimen/size_text"
-            android:background="@drawable/style_bt_green"
-            android:backgroundTint="@color/elements_dark_green"
-            android:layout_marginTop="@dimen/margin_between_elements"
             android:layout_marginBottom="@dimen/margin_between_elements"
             />
         <Button
             android:id="@+id/activity_settings_game_one_on_one__bt_begin"
+            style="@style/button_settings"
             android:layout_width="200dp"
-            android:layout_height="@dimen/height_elements"
             android:text="@string/activity_settings_game_one_on_one__begin"
-            android:fontFamily="@font/gost_type"
-            android:gravity="center"
             android:layout_gravity="center_horizontal"
-            android:textSize="@dimen/size_text"
-            android:background="@drawable/style_bt_green"
-            android:backgroundTint="@color/elements_dark_green"
-            android:layout_marginTop="@dimen/height_elements"
-            android:layout_marginBottom="@dimen/margin_between_elements"/>
+            android:layout_marginTop="@dimen/height_elements" />
     </LinearLayout>
 
 

@@ -17,7 +17,9 @@
     <color name="elements_purple">#9535CC</color>
     <color name="cell_press">#EAEAEA</color>
     <color name="pink">#DF598F</color>
-    <color name="mascot_one">#A7FFEB</color>
-    <color name="mascot_two">#FF80AB</color>
+    <color name="mascot_1">#A7FFEB</color>
+    <color name="mascot_2">#FF80AB</color>
     <color name="mascot_online">#82B1FF</color>
+    <color name="focus_name">#64000000</color>
+    <color name="no_focus_name">#33000000</color>
 </resources>

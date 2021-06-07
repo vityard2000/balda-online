@@ -6,7 +6,7 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/style_solid_corners_green"
+        android:background="@drawable/style_no_pressed_green"
         android:orientation="horizontal"
         android:paddingLeft="15dp"
         android:layout_gravity="start"
@@ -34,7 +34,7 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/style_solid_corners_green"
+        android:background="@drawable/style_no_pressed_green"
         android:orientation="horizontal"
         android:paddingRight="15dp"
         android:layout_gravity="end"
